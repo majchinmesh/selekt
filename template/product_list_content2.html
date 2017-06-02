@@ -1,0 +1,94 @@
+	<div  style=" padding-left: 25px;margin-top:50px;float:right;min-height:630px;width: 69%; background: white">	
+					<br>
+					<div ng-show="textTag">
+						<h1 style ="font-size: 15px;margin: 0;display: table"> {{headings}} <span style="font-size: 15px;color:lightgray">({{total_items}}&nbsp products)  </span> </h1>
+							<hr>	
+						<div ng-if="!show_content" style=" display: table; font-size: 15px;    width: 85%;  text-align: justify; ">
+
+									<div class="paraText" ng-repeat="sentence in sentences.slice(0,1)" ng-show="content_type">
+
+											<h4 style="font-size: 15px">{{sentence.header.toString().split("_").join(" ")}}<h4>
+												<h5 style="font-size: 12px">
+													{{sentence.sentence.toString().split("_").join(" ")}}<span  ng-show="$first && (sentences.length>1) " ng-click="showMore()" style="cursor: pointer;color: #0090c0;font-size: 12px;margin-left:15px" > {{show_more_less}}</span>
+												</h5>
+												
+									</div> 
+									<div ng-show="_show_more && content_type" class="paraText" ng-repeat="sentence in sentences.slice(1,10)" >
+
+											<h4 style="font-size: 15px">{{sentence.header.toString().split("_").join(" ")}}<h4>
+												<h5 style="font-size: 12px">
+													{{sentence.sentence.toString().split("_").join(" ")}}
+												</h5>
+												
+									</div>
+									<div  ng-show="!content_type" style="font-size: 15px" ng-repeat="(key, attribute) in tabular" ng-if ="$index < 4">
+										{{key.split("_").join(" ")}} :<br>
+											<ul  class="paraText" ng-repeat="value in attribute" ng-if ="$index < 4">	
+												<li > {{value}} </li>
+											</ul>
+									</div>
+									
+						</div>
+					</div>
+					<br>
+				<div ng-show="showload" class="loader">
+                          <div ></div>  <div ></div>  <div ></div> 
+                  </div>
+				<img ng-show="!products_list[0] && !showload" src="pics/no_products_found.jpg" alt="typing..." style="margin-left: 40%;margin-top:180px">		
+				<!--<img  ng-show="showload" src="pics/loading2.gif" style="margin-left: 30%;margin-top:180px "  width="200px">-->
+				<div  scroll ng-show="!showload" >
+					
+							<div ng-if="!add_link" id="dialogs" class="load_images" style="cursor: pointer;display: inline-block;width: 420px;margin-left: 20px"  ng-click="!add_link && setProductPage(x)"   ng-bootbox-custom-dialog ng-bootbox-custom-dialog-template="/template/product_page.html"  ng-repeat=" x in products_list"  style="cursor: pointer;display: inline-flex">
+									<div  style="display: inline-flex">
+												<div >			
+													<a ng-href="{{add_link && x.landingPageUrl}}" ><img  src="{{x.style_image.search.imageURL}}" height="300px" width="220px"></a>
+												</div>
+												<div style="min-width: 200px">  
+													<br>
+													<span style="font-weight:bold ;margin-left: 5px;text-overflow:ellipsis;">&nbsp&nbsp{{x.product_filter.brand.toUpperCase().substr(0, 16)}}
+													<span ng-show="x.product_filter.brand.length > 20">...</span>  
+													</span>
+											<br>	<span style="font-weight: 400;font-size: 11px;" >&nbsp&nbsp&nbsp&nbsp₹&nbsp{{x.product_filter.discount_price}}.00&nbsp</span>
+													<strike style="font-weight: 400;font-size: 11px;color: gray" ng-hide="x.product_filter.discount_percent == 0">₹&nbsp{{x.product_filter.price}}.00</strike>
+													<span style="font-weight: 400;font-size: 11px;color: #0090c0" ng-hide="x.product_filter.discount_percent == 0" >&nbsp&nbsp{{x.product_filter.discount_percent}}% Off</span>
+											<br>	<span style="color: gray;font-size: 12px;font-weight:400 ">&nbsp&nbsp&nbsp&nbsp{{x.product_filter.website.toUpperCase()}}</span>
+													<div class="benefit_div">
+														<button ng-repeat="x in x.benefits" class="benefits_tags">{{x}}</button>
+													</div>
+													
+												</div>
+									</div>
+									<div ng-if="add_description" style="padding: 10px;text-align: justify;">
+										{{x.product_filter.product_desription}}
+									</div>
+										
+							</div>
+							<div ng-if="add_link" id="dialogs" class="load_images" style="display: inline-block;width: 420px;margin-left: 20px"  ng-click="!add_link && setProductPage(x)"   ng-bootbox-custom-dialog-template="/template/product_page.html"  ng-repeat=" x in products_list"  style="cursor: pointer;display: inline-flex">
+									<div  style="display: inline-flex">
+												<div >			
+													<a ng-href="{{add_link && x.landingPageUrl}}" ><img  src="{{x.style_image.search.imageURL}}" height="300px" width="220px"></a>
+												</div>
+												<div style="min-width: 200px">  
+													<br>
+													<span style="font-weight:bold ;margin-left: 5px;text-overflow:ellipsis;">&nbsp&nbsp{{x.product_filter.brand.toUpperCase().substr(0, 16)}}
+													<span ng-show="x.product_filter.brand.length > 20">...</span>  
+													</span>
+											<br>	<span style="font-weight: 400;font-size: 11px;" >&nbsp&nbsp&nbsp&nbsp₹&nbsp{{x.product_filter.discount_price}}.00&nbsp</span>
+													<strike style="font-weight: 400;font-size: 11px;color: gray" ng-hide="x.product_filter.discount_percent == 0">₹&nbsp{{x.product_filter.price}}.00</strike>
+													<span style="font-weight: 400;font-size: 11px;color: #0090c0" ng-hide="x.product_filter.discount_percent == 0" >&nbsp&nbsp{{x.product_filter.discount_percent}}% Off</span>
+											<br>	<span style="color: gray;font-size: 12px;font-weight:400 ">&nbsp&nbsp&nbsp&nbsp{{x.product_filter.website.toUpperCase()}}</span>
+													<div class="benefit_div">
+														<button ng-repeat="x in x.benefits" class="benefits_tags">{{x}}</button>
+													</div>
+													
+												</div>
+									</div>
+									<div ng-if="add_description" style="padding: 10px;text-align: justify;">
+										{{x.product_filter.product_desription}}
+									</div>
+										
+							</div>
+									<button ng-show="remining" style="margin: 50px 0px 50px 40%" ng-click="showMoreProducts()" class="btn"> &nbsp&nbsp&nbsp&nbsp Show {{remining}} More Products  &nbsp&nbsp&nbsp&nbsp</button>
+								
+				</div>
+		</div>

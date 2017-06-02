@@ -1,0 +1,82 @@
+<div style="font-size: 30px; padding-left: 1.7%;float:left;width: 100%; background: white; margin-bottom: 70px">
+
+
+    <div class="container" style="">
+        <div class="row"  style="height: 500px;">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <!-- Carousel -->
+    <h2 class="category_headings" style="font-weight: 500">WOMEN'S FASHION</h2>
+    <h1 style="margin-top: 15px;margin-bottom: 15px; font-size: 16px;font-weight: 400;">Explore and discover among huge collection of
+        footwear, accesssories and western wear clothing that best suit you.</h1>
+
+
+            <div id="carouselSlider"    class="carousel slide"  data-ride="carousel" data-interval="2000"
+                 style="width: 100%;float: left;padding-right: 15px;">
+                <!-- Indicators -->
+                <ol class="carousel-indicators" style="z-index: 2">
+                    <li data-target="#carouselSlider" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselSlider" data-slide-to="1"></li>
+                    <li data-target="#carouselSlider" data-slide-to="2"></li>
+                </ol>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="item active" ng-repeat="x in inspirations_true.slice(0,1)">
+                        <a  target="_self" href="{{website}}/find/{{x.heading | lowercase |replacespace}}">
+                            <img class="img-responsive" style="width: 120%" src="{{x.imageUrl}}" alt="inspiration">
+                            <div>
+                              
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" ng-repeat="x in inspirations_true.slice(1,2)">
+                        <a  target="_self" href="{{website}}/find/{{x.heading | lowercase |replacespace}}">
+                            <img class="img-responsive" style="width: 120%" src="{{x.imageUrl}}" alt="inspiration" >
+                            <div>
+                               
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" ng-repeat="x in inspirations_true.slice(2,3)">
+                        <a  target="_self" href="{{website}}/find/{{x.heading | lowercase |replacespace}}">
+                            <img class="img-responsive" style="width: 120%" src="{{x.imageUrl}}" alt="inspiration">
+                            <div>
+                              </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Controls -->
+            <a class="left carousel-control" data-target="#carouselSlider" data-slide="prev" style="left: 5%">
+                <span ><img src="./pics/buttons/left.png" style="min-width: 50px;min-height: 50px" class="img-responsive"></span>
+            </a>
+            <a class="right carousel-control" data-target="#carouselSlider" data-slide="next" style="right:6.8%">
+                <span style="" ><img src="./pics/buttons/right.png" style="min-width: 50px;min-height: 50px" class="img-responsive"></span>
+            </a>
+            </div><!-- /carousel -->
+
+        </div>
+    </div><!--end row-->
+
+    <div class="row" style="display: inline-block; width: 100%; cursor: pointer;padding-left: 0px;margin-left:0px;"  >
+        <div class="col-lg-6 col-md-12 col-sm-12"  ng-repeat="x in inspirations_false" style="padding-left: 0px;margin-left: 0px;">
+        <a  target="_self" href="{{website}}/find/{{x.heading | lowercase |replacespace}}">
+            <div style="display:flex; height: 362px; border:1px solid rgba(0,0,0,.08);margin:0px;padding:0px;margin-top: 10px; width: 100%;font-size: 30px;min-height: 250px;padding-right:10px; " >
+                <div style="">
+                    <div style="top: 32%;position: relative;padding: 5px ">
+                        <h1 style="padding-top:10px ;text-align: center;font-size: 22px; font-weight: bold; color: #000;font-weight: 300;">
+                            <b>{{x.heading}}</b> </h1>
+                        <button style="position: relative; left: 25%;border
+                        :2px solid black;background: white;color: black;font-size: 14px;padding: 4px;padding-right: 7px;padding-left: 7px;">
+                            Shop Now
+                        </button>
+                    </div>
+                </div>
+                <div >
+                    <img style="float: right;" src="{{x.imageUrl}}" class="img-responsive" alt="inspiration" height="360px" width="260px">
+                </div>
+            </div>
+        </a>
+        </div>
+
+    </div><!--end row-->
+</div><!--end container-->
+</div>

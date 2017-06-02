@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Private Chat Application with Node.js, Socket.IO and AngularJS</title>
+    <meta name="generator" content="Bootply">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="css/style_find.css">
+    <link rel="stylesheet" href="css/jasny-bootstrap.min.css">
+
+<script type="text/javascript">
+
+      $(window).scroll(function() {
+        var d2 = document.getElementById("div2");
+        var inp_f = document.getElementById("inp_field");
+var gt = document.getElementById("gotoTop");
+        var foot = document.getElementById("foot");
+
+        //var ref = document.getElementById("ref");         
+
+            if($(window).scrollTop() >=1350) {
+        gt.style.display='block';
+             }
+         else{
+        gt.style.display='none';
+            }
+
+        var height = foot.offsetHeight;
+   if($(window).scrollTop() + $(window).height() +height >= $(document).height()) {
+        var h=$(window).scrollTop() + $(window).height() +height -$(document).height();
+        d2.style.bottom= h -2+ 'px';
+        inp_f.style.bottom=h -2+ 'px';
+   }
+   else{
+            d2.style.bottom="0px";
+            inp_f.style.bottom="0px"
+            //ref.style.bottom="0px";
+
+   }
+});
+
+
+    </script>
+    <style>
+
+    .talktext{
+  padding: 1em;
+    text-align: left;
+  line-height: 1.5em;
+}
+.talktext p{
+  /* remove webkit p margins */
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+.tri-right.border.left-top:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+  left: -40px;
+    right: auto;
+  top: -8px;
+    bottom: auto;
+    border: 25px solid;
+    border-color: #fff transparent transparent transparent;
+}
+.tri-right.left-top:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+  left: -12px;
+    right: auto;
+  top: 0px;
+    bottom: auto;
+    border: 14px solid;
+    border-color: white transparent transparent transparent;
+}
+
+.talk-bubble {
+    margin-left: 1%;
+  position: relative;
+    height: auto;
+    background-color: white;
+}
+
+    .talktext{
+  padding: 1em;
+    text-align: right;
+  line-height: 1.5em;
+}
+.talktext p{
+  /* remove webkit p margins */
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+.tri-left.border.right-top:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: -40px;
+    left: auto;
+    top: -8px;
+    bottom: auto;
+    border: 25px solid;
+    border-color: #5DCCCD transparent transparent transparent;
+}
+.tri-left.right-top:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: -10px;
+    left: auto;
+    top: 0px;
+    bottom: auto;
+    border: 12px solid;
+    border-color: #5DCCCD transparent transparent transparent;
+}
+
+.talk-bubble1 {
+    position: relative;
+    height: auto;
+    background-color: #5DCCCD;
+}
+        .chat_content_absolute {
+            background-image: url({{chatImage}});
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 5px 0px 10px 5px;
+            overflow-y: auto;
+            position: absolute;
+            overflow-x: hidden;
+            height: 90%;
+            width: 31%;
+            float: left;
+        top: {{set_top}}px;
+        }
+        .chat_content_fixed {
+            background-image: url({{chatImage}});
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 5px 0px 10px 5px;
+            overflow-y: auto;
+            margin-top: 98px;
+            position: fixed;
+            overflow-x: hidden;
+            height: 90%;
+            width: 31%;
+            float: left;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>
+<body cz-shortcut-listen="true" style="background: white">
+<div ng-show="show_overlay" class="offcanvas-overlay" ng-click="show_overlay = 0; offcanvas_show_profile = 1; offcanvas_show_edit = 0">
+</div>
+<div ng-show="!show_page">
+    <div class="loader" style="position: fixed; left: 50%; top: 50%; ">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div id="main_page" ng-show="show_page" style="background-image: none;background-color: #fff;background:#fff;border:none;" >
+    <nav_header></nav_header>
+
+    <div class="container" id="cont" style="background-color: #fff;background:none;background-image: none;" >
+        <div ng-show="shop_by_brands_dir" class="row" style="padding-top: 62px;">
+            <shop-by-brands></shop-by-brands>
+        </div>
+        <div ng-show="!shop_by_brands_dir" class="row "  style="padding-top: 62px;" >
+                <div id="div2" class="col-lg-3  col-md-4 col-sm-3" style="width: 28vw;margin: 0px;padding: 0px;">
+                <chat-bot></chat-bot>
+                </div>
+            <div  class="col-lg-8  col-md-8 col-sm-9 "  id="div1" style="width: 70vw;overflow-y: hidden;padding: 0px;margin: 0px;
+            overflow-x: hidden" >
+
+                    <!-- refresh list module --
+                    <div  ng-show="ref" style="background: rgba(0, 0, 0, 0.85); width: 70vw;height: 100%;z-index: 9;position: absolute;">
+                    <button ng-click="ref = 0;" class="btn" style="left:58%;top:50%; position: fixed; float: right;padding-left: 0%;padding-right: 2.2%;padding-top: 4px;height: 38px;color: #fff;background-color: #5DCCCD;border-radius:0px;font-size: 20px;"  id="ref" type="button">REFRESH<img src="../pics/icons/resetbutton.png" class="img-responsive" style="height: 38px; float: left; margin-right: 5px;margin-top: -4px; " class="icon_reset"></button>  
+                </div>
+                    <!-- refresh list module -->
+
+                <inspirations ng-show="inspirations_dir"></inspirations>
+                <product-list-content ng-show="product_list_content_dir"></product-list-content>
+                <hr style="margin-bottom: 40px; border: 2px solid #eee">
+                <div id="categories" style="">
+                    <category-page></category-page>
+            </div>
+
+            </div>
+
+        </div>
+        <div class="row" style="position: absolute;padding: 0px;margin: 0px;" class="row">
+            <footer-div></footer-div>
+            <div id="gotoTop" ng-click="gototop()" style="background:none;border: none;box-shadow: none;">
+                <img src="../pics/arrow_up.png" style="font-family: 'Lato';padding-bottom: 0; margin-bottom: 0; line-height: 1;background: white;border-radius: 100%; " class="img-responsive">
+
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

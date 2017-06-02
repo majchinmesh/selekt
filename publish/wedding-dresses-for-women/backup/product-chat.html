@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Private Chat Application with Node.js, Socket.IO and AngularJS</title>
+    <meta name="generator" content="Bootply">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="css/style_find.css">
+    
+
+    <style>
+        .chat_content_absolute {
+            background-image: url({{chatImage}});
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-left: 0%;
+            padding: 5px 0px 10px 5px;
+            overflow-y: auto;
+            position: absolute;
+            overflow-x: hidden;
+            height: 90%;
+            width: 31%;
+            float: left;
+        top: {{set_top}}px;
+        }
+        .chat_content_fixed {
+            background-image: url({{chatImage}});
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-left: 0%;
+            padding: 5px 0px 10px 5px;
+            overflow-y: auto;
+            margin-top: 98px;
+            position: fixed;
+            overflow-x: hidden;
+            height: 90%;
+            width: 31%;
+            float: left;
+        }
+    </style>
+</head>
+<body cz-shortcut-listen="true" style="background: white">
+<div ng-show="!show_page">
+    <div class="loader" style="position: fixed; left: 50%; top: 50%; ">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div ng-show="show_page" scroll >
+    <div>
+        <div>
+            <chat-bot></chat-bot>
+            <product-list-content ng-if="product_list_content_dir"></product-list-content>
+            <inspirations ng-if="inspirations_dir"></inspirations>
+        </div>
+    </div>
+    <div id="categories">
+        <category-page></category-page>
+    </div>
+    <nav_header></nav_header>
+    <div style="position: relative; clear: both;">
+        <footer-div></footer-div>
+    </div>
+    <button id="gotoTop" ng-click="gototop()">
+        <p style="font-family: FontAwesome;font-size:22px;padding-bottom: 0; margin-bottom: 0; line-height: 1;">
+            &#xf106;</p>TOP
+    </button>
+</div>
+</body>
+</html>

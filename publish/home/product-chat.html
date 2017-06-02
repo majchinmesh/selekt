@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Private Chat Application with Node.js, Socket.IO and AngularJS</title>
+    <meta name="generator" content="Bootply">
+    <meta name="description" content="Selekt is a chat based interactive assistant that helps in finding products suiting your needs. Based on your requirements, Selekt recommends a list of products with the features, specification, application etc.">
+    <update-meta name="description" content="A page specific description"></update-meta>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+</head>
+<link rel="stylesheet" href="../../css/all_style_css.css">
+<!--
+<link rel="stylesheet" href="css/footer.css">
+-->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<body >
+
+<div class="main_banner row ng-scope ng-isolate-scope" >
+    <img ng-show="side_logo" src="pics/logo.png" width="0px" style="margin: 30px ;"  alt="logo">
+
+
+    <!--<div style="margin: 30px 0px 0px 41.5%">
+           <img  ng-show="!typing"  src="pics/typing.png" width="140px"  alt="logo">
+    </div>-->
+
+    <div class="typings" ng-init = myDialog() blink-cursor="false" typewrite="" type-delay="30" text="typing_Text" initial-delay="3s" callback-fn="hideWave()" >
+        <span ng-show="df" class="blink">|</span>
+        <br>
+    </div>
+    <div ng-show="showTile" style="display: inline-flex;margin: 30px 10% 0px 21.5%; width: 100%; ">
+
+        <div class="image-wrapper" style="margin-left:100px ">
+            <a  href="{{website}}/find/women">
+                <img src="pics/tiles/tile1.png" alt="apple" width="270px" height="130px">
+                <p  data-hover="Women's Fashion" style="text-align: center;">Women's Fashion</p>
+            </a>
+        </div>
+
+
+        <div class="image-wrapper" style="margin-left:100px ">
+            <a  href="">
+                <img src="pics/tiles/tile2.png" alt="apple" width="270px" height="130px">
+                <p  data-hover="Coming Soon..." style="text-align: center;">Men's Fashion</p>
+            </a>
+        </div>
+
+
+    </div>
+
+
+    <div ng-show="showTile" style="display: inline-flex;margin: 50px 10% 0px 34%; width: 100%;">
+
+        <div class="image-wrapper" style="margin-left:100px ">
+            <a  href="">
+                <img src="pics/tiles/tile3.png" alt="apple" width="270px" height="130px">
+                <p  data-hover="Coming Soon..." style="text-align: center;">Mobiles</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="logo">
+        <div class="logo divss" style="">
+            <img  src="pics/logo.png" width="250px" alt="logo">
+            <br><br><br><br><br>
+            <div class="loader">
+                <div ></div>  <div ></div>  <div ></div>
+            </div>
+        </div>
+
+        <div   ng-class="(typing) ? 'preloader waves' : 'preloader_pause waves'"    style="background-image: url("pics/logo.png")">
+        <span></span>
+        <span></span>
+        <span></span>
+        <!--<span ng-style="(!typing ) && {'animation': 'preloader 1.5s infinite ease-in-out'}"></span>
+        <span ng-style="(!typing ) && {'animation': 'preloader 1700ms infinite ease-in-out'}"></span>
+        <span ng-style="(!typing ) && {'animation': 'preloader 1900ms infinite ease-in-out'}"></span> -->
+    </div>
+</div>
+<div ng-show="showTile" style="background:#191818;margin-top:100px;padding-left: 2%;">
+   
+   <footer-div></footer-div>
+
+    <button id="nav_btn" class="row nav nav-tabs" onclick="scrollTo($('#end'), 2000);" style="background-color: #191818; color: #fff; padding: 5px;padding-bottom: 0px;margin-bottom: 0px; " type="button" data-toggle="collapse" data-target="#footer_nav">NAVIGATION</button>  
+
+<div class="row" style="margin-top:10px; background:#191818;">
+        <div id="footer_nav"  class="collapse" >
+        <div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <table>
+                        <thead><h4
+                                style="color: #fff; font-weight:bold; padding-top: 12px;padding-bottom: 8px; padding-left: 14%;">
+                            Western Wear</h4>
+                        </thead>
+                        <tr>
+                            <td valign="top" style="padding:  25px;">
+                                <ul class="cat-head" ><span><p style="font-weight: bold; color: #fff">Topwear</p></span>
+                                    <li style="line-height: 0.6em;">&nbsp;</li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/dresses">Dresses</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/tops">Tops</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/tshirts">T-shirts</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/shirts">Shirts</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/jackets">Jackets</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/blazzers">Blazzers</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/sweaters">Sweaters</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/sweatshirts">Sweatshirts</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/jumpsuits">Jumpsuits</a></li>
+                                </ul>
+                            </td>
+                            <td valign="top" style="padding:  25px;">
+                                <ul class="cat-head"><span><p style="font-weight: bold; color: #fff">Bottomwear</p></span>
+                                    <li style="line-height: 0.6em;">&nbsp;</li>
+                                    
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/jeans"> Jeans</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/skirts">Skirts</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/shorts">Shorts</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/trousers">Trousers</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/capris">Capris</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/jeggings">Jeggings</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <table >
+                        <thead><h4
+                                style="color: #fff; font-weight:bold; padding-top: 12px; padding-bottom: 8px; padding-left: 14%;">
+                            Ethnic Wear</h4>
+                        </thead>
+                        <tr >
+                            <td valign="top" style="padding:  25px;" >
+                                <ul class="cat-head" ><span><p style="font-weight: bold; color: #fff">Topwear</p></span>
+                                    <li style="line-height: 0.6em;">&nbsp;</li>
+                                    <li class="cat-sub-link"><a target="_self" href="{{website}}/find/kurtas">Kurtas</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Tops</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Sarees</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Lehenga Choli</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Jackets</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Waistcoats</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Dress Material</a></li>
+                                </ul>
+                            </td>
+                            <td valign="top" style="padding:  25px;">
+                                <ul class="cat-head"><span><p style="font-weight: bold; color: #fff">Bottomwear</p></span>
+                                    <li style="line-height: 0.6em;">&nbsp;</li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Leggings</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Churidars</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Salwars</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Skirts </a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Palazzos</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <table>
+                        <tr>
+                            <td valign="top">
+                                <h4 style="color: #fff; font-weight:bold; padding-top: 12px;padding-left: 21%;">
+                                    Footwear</h4>
+                                <ul class="cat-head" style="color: #fff">
+                                    <li class="cat-sub-link"><a target="_self" href="#">Flats</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Heels</a></li>
+                                    <li class="cat-sub-link"><a target="_self" href="#">Casual Shoes</a></li>
+                                </ul>
+                                <h4 style="color: #fff; font-weight:bold; padding-top: 12px;padding-left: 21%;">
+                                    Fashion Accessories</h4>
+                                <ul class="cat-head" style="">
+                                    <li class="cat-sub-link"><a target="_self" href="#">Handbags</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            </div>
+        <!--/.container--> 
+    </div>
+</div>
+</div>
+<input type="hidden" name="end" id="end">
+
+</body>
+</html>

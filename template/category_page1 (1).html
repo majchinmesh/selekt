@@ -1,0 +1,69 @@
+<div scroll2  ng-if="productline_name" id="category_pages" class="category_page_dresses">
+		<br>
+		<h1 style="text-transform: uppercase" >{{productline_name}} STORE </h1><br>		<br>
+
+<div ng-if="!(selected_shopby == 'web')" class="category_sbo">
+			<h3 class="category_heading">SHOP {{currently_selected}} {{productline_name}} by occasion</h3>
+			<div style="margin: 45px">
+				<div ng-click="categoryPage(x,'web')" style="display: inline-block;margin: 10px ;width: 284px;height: 284px" ng-repeat="x in occasions">
+						<img src="pics/dress_store/occasion/{{x}}.png"  alt="{{x}}" width="284px" height="284px">
+				</div>
+			</div>
+</div>
+
+		
+<div ng-if="!(selected_shopby == 'age')" class="category_sba">
+
+			<h3 class="category_heading">SHOP {{currently_selected}} {{productline_name}} BY AGE</h3><br>
+			<br>
+
+			<div>
+				<div ng-click="categoryPage('18-27','age')" style="min-width: 49%;background: url('/pics/dress_store/age/teenage.png');min-height: 350px;background-size: 100% 100%;">
+				</div>
+				<div ng-click="categoryPage('28-38','age')" style="min-width: 49%;background: url('/pics/dress_store/age/adult.png');min-height:350px;background-size: 100% 100%;">
+				</div>
+				
+				
+			</div>
+</div>
+<div ng-if="!(selected_shopby == 'body_shape')" class="category_sbbs">
+			<h3 class="category_heading">SHOP {{currently_selected}} {{productline_name}} BY BODY SHAPE</h3>
+			<div>
+				<div ng-click="categoryPage(x,'body_shape')" style="cursor: pointer; margin: 30px;width: 230px;height: 450px" ng-repeat="x in ['rectangle','apple','pear','hourglass']">
+					<img alt="x" height="450px" src="pics/dress_store/body_shape/{{x}}.png" width="210px">
+					<h4 style="text-transform: uppercase" >{{x}}</h4>
+					
+				</div>
+			
+			</div>
+		</div>
+<div ng-if="!(selected_shopby == 'height')"  class="category_sba">
+
+			<h3 class="category_heading">SHOP {{currently_selected}} {{productline_name}} BY HEIGHT</h3><br>
+			<br>
+
+			<div>
+				<div ng-click="categoryPage('short','height')" style="min-width: 49%;background: url('/pics/dress_store/height/short.png');min-height: 418px;background-size: 100% 100%;">
+				</div>
+				<div ng-click="categoryPage('tall','height')" style="min-width: 50%;background: url('/pics/dress_store/height/tall.png');min-height: 418px;background-size: 100% 100%;">
+				</div>
+				
+				
+			</div>
+		</div>
+		
+		
+
+		<div ng-if="!(selected_shopby == 'skin_colour')"  class="category_sba">
+
+			<h3 class="category_heading">SHOP {{currently_selected}} {{productline_name}} BY SKIN TONE</h3>
+			<div  style="padding: 10px">
+				<div ng-click="categoryPage(x,'skin_colour')" ng-repeat="x in ['fair','wheatish','dusky']" style="margin:1%;min-width: 30%;background: url('/pics/dress_store/skintone/{{x}}.png');min-height: 400px;background-size: 100% 100%;">
+				</div>
+			</div>
+		</div>
+
+		
+		<div style="margin-bottom: 100px"></div>
+		
+</div>

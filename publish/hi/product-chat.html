@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Private Chat Application with Node.js, Socket.IO and AngularJS</title>
+	<meta name="generator" content="Bootply">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<style>
+
+.fading {
+    -webkit-animation: fadi 1s 1;
+    -moz-animation: fadi 1s 1;
+}
+@-webkit-keyframes fadi {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-moz-keyframes fadi {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.load_images{
+	border:1px solid #e3e3e3;
+	box-shadow: 0 7px 25px #B5B5B5;
+	display: inline-block ;
+	background: white;
+	padding-right: 20px;
+    padding-left: 9px;
+	 margin:10px
+}
+.scrollbar
+{
+	overflow-x: hidden;
+	float: left;
+	margin-right:5px; 
+	height: 560px;
+	width: 100%;
+	overflow-y: auto;
+	color: green;
+	padding: 5px
+}
+
+.force-overflow
+{
+	min-height: 0px;
+}
+
+
+
+
+#style-1::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px gray;
+	border-radius: 5px;
+	background-color: gray
+}
+
+#style-1::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #0090c0;
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 6px #0090c0;
+	background-color: #0090c0;
+}
+
+div {
+	font-family:  "Primary-Bold",Arial,"Helvetica Neue",Helvetica,sans-serif;
+	font-size: 15px;
+	color:black;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 100;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+}
+.inputs td{
+	padding: 5px;
+}
+.chatfont{
+   font-family: "Primary-Bold",Arial,"Helvetica Neue",Helvetica,sans-serif;
+	font-size: 15px;
+    letter-spacing: 0.5px !important;
+    color: #484848 !important;
+    font-weight: 200 !important;
+	font-size: 13px
+}
+
+
+.ownfont{
+    font-family: sans-serif;
+    letter-spacing: 0.5px !important;
+    color: #484848 !important;
+    font-weight: 200 !important;
+}
+.filter{
+	margin:13px 13px 13px 0px ;
+	color:#cdcece;
+	border: none;
+	font-size:13px;
+	background:rgba(0, 0, 0, 0.93);
+}
+.options{
+	border-radius: 5px;float:left ; background-color:rgba(255, 255, 255, 0.9);;margin-left: 5px;font-size: 20px;padding-right: 60px;margin-top:-18px
+}
+.icon_reset{
+	
+	float: right;margin: 15px 0px 10px 0px;border: none;height: 13px
+}
+.btn_reset
+{
+	color: #cdcece; float: right;border: none;margin: 13px 80px 13px 0px;font-size:13px;background:rgba(0, 0, 0, 0.93);
+}
+</style>
+</head>
+
+<body cz-shortcut-listen="true"  style="background: white">
+
+	<div class="ownfont" class ="inputs" ng-show="!chat"style="background:white ;height: 600px;display: flex; justify-content: center;">
+			<table ng-show="showName" style="padding-left: 300px;align-self: center;font-size: 20px;font-weight: bold">	
+				<tr> 	<td>Enter your Height</td> </tr>
+				<tr>
+					<td> feet </td>
+					<td> inches </td>
+				</tr>
+				<tr style="padding:5px ">
+					<td> <input type="number" step="0.5" min="1" max="10" ng-model="heightFeet"> </td>
+					<td> <input type="number" step="1" min="0" max="11" ng-model="heightInche"> </td>
+					<td> <input type="button" value="submit" ng-click="showNext('height')"> </td>
+				</tr>
+			</table>
+			<table ng-show="showHeight" style="padding-left: 300px;align-self: center;font-size: 20px;font-weight: bold">	
+				<tr> 	<td>Select your Body Shape</td> </tr>
+				<tr>
+					<td> <img ng-src="/pics/apple.png" alt="Apple" height="440px" width="280px" ng-click="showNext('color')" /> </td>
+					<td> <img ng-src="/pics/pear.png" alt="Apple" height="440px" width="280px" ng-click="showNext('color')" /> </td>
+					<td> <img ng-src="/pics/column.png" alt="Apple" height="440px" width="280px" ng-click="showNext('color')" /> </td>
+					<td> <img ng-src="/pics/hourglass.png" alt="Apple" height="440px" width="280px" ng-click="showNext('color')" /> </td>
+						<td>  </td>
+				</tr>
+			</table>
+			<table ng-show="showCoslor" style="padding-left: 300px;align-self: center;font-size: 20px;font-weight: bold">	
+				<tr> 	
+						<td>Bust Size</td>
+						<td>Waist Size</td>
+						<td>Hip Size</td>
+						<td>Foot Size</td>
+			    </tr>
+				<tr>
+					<td> <img ng-src="/pics/apple.png" alt="Apple" height="250px" width="180px" ng-click="showNext('chat')" /> </td>
+					<td> <img ng-src="/pics/pear.png" alt="Apple" height="250px" width="180px" ng-click="showNext('chat')" /> </td>
+					<td> <img ng-src="/pics/column.png" alt="Apple" height="250px" width="180px" ng-click="showNext('chat')" /> </td>
+					<td> <img ng-src="/pics/column.png" alt="Apple" height="250px" width="180px" ng-click="showNext('chat')" /> </td>
+			
+				</tr>
+				<tr>
+					<td>Inches : <input type="number" step="1" min="10" max="60" ng-model="heightInche"></td>
+					<td>Inches : <input type="number" step="1" min="10" max="60" ng-model="heightInche"></td>
+					<td>Inches : <input type="number" step="1" min="10" max="60" ng-model="heightInche"></td>
+					<td>Inches : <input type="number" step="1" min="10" max="60" ng-model="heightInche"></td>
+
+				</tr>
+				
+			</table>
+			<table ng-show="showCwolor" style="padding-left: 300px;align-self: center;font-size: 20px;font-weight: bold">	
+				<tr> 	<td>Select your Skin Tone</td> </tr>
+				<tr><td> <img ng-src="/pics/apple.png" alt="Apple" height="140px" width="480px" ng-click="showNext('chat')" /> </td></tr>
+				<tr>	<td> <img ng-src="/pics/pear.png" alt="Apple" height="140px" width="480px" ng-click="showNext('chat')" /> </td></tr>
+				<tr>	<td> <img ng-src="/pics/column.png" alt="Apple" height="140px" width="480px" ng-click="showNext('chat')" /> </td></tr>
+				
+			</table>
+
+			<table ng-show="showColor" style="padding-left: 300px;align-self: center;font-size: 20px;font-weight: bold">	
+				<tr> 	<td>Select your Date of Birth</td> </tr>
+				<tr>
+					<td> Date : <input type="number" step="1" min="1" max="31" ng-model="heightFeet"> </td>
+					<td> Month : <input type="number" step="1" min="1" max="12" ng-model="heightInche"> </td>
+					<td> Year : <input type="number" step="1" min="1950" max="2020" ng-model="heightInche"> </td>
+					<td><input type="button" value="submit" ng-click="showNext('chat')"> </td>
+				</tr>
+				
+			</table>
+	</div>
+<!--height,dob,bodyshare(pics),skin tone (pics),sizes(nust,waist,hip,foot)-->
+
+	<div ng-show="chat" class="chatfont" style="border-right: 2px solid #2f2d2c">
+		
+			<i class="fa fa-spin fa-refresh fa-5x" id="loader" style="display: none;"></i>
+			<div class="row ng-scope"  style="position: fixed;background:black ; opacity: 0.9; font-weight: lighter;font-style:italic ;background-size:100% 100%;width: 33%;height: 43px ;float: left; ">
+				<table style=" display:table_cell;width:100%;  table-layout:fixed;position: fixed ;width:34%">
+					<tr>
+						<td style="border-right: 1px solid #5d5d5d;">
+							<img src="pics/icons/icon_menu.png" style="height: 13px;float: left;margin: 15px 0px 10px 10px;border: none;">
+							<button id="datasend " class="filter" type="button">MENU </button>
+								</td>
+						<td style="border-right: 1px solid #5d5d5d;">
+							<img src="pics/icons/icon_filter.png" style="float: left;margin: 15px 0px 10px 5px;border: none;height: 13px">
+							<button class="filter" id="datasend " type="button">FILTERS    </button>
+						</td>
+						<td>
+							<button class="btn_reset" id="datasend " type="button">RESET</button>
+							<img src="pics/icons/icon_reset.png"  height="24px" class="icon_reset">
+							<!--<img src="pics/v_line.png" style="float: right;border: none;height: 50px;width: 0.4px;margin-right:10px">-->
+						</td>
+				</table>
+					</div>
+			<div class="row ng-scope" class="chatfont"  schroll-bottom="users" style="background-image:url({{chatImage}});background-repeat:no-repeat;background-size:cover;   padding: 5px 0px 5px 5px;overflow-y: auto ;margin-top:43px;position: fixed; overflow-x:hidden;height: 650px;width: 33% ;float: left; ">
+				<div class="chatfont"  class="row ng-scope">
+					<div class="scrollbar" id="style-1">
+						<div   ng-show='getCnf' style="margin: 10px" >
+						<div class="row " id="userList" style="display: block;">
+							<div ng-repeat="user in users" class="fading col-sm-12 ng-scope">
+								<div class="row" ng-if="user" >
+									<div  class="col-xs-2" ng-class="{'col-xs-push-10' : !(user.username == currentUser)}">
+										
+									</div>
+									<div style="padding-right: 5px; padding-left: 5px;" class="col-xs-10" ng-class="{'col-xs-pull-2' : !(user.username == currentUser)}">
+										<div  style="background-color:rgba(255, 255, 255, 0.9);  border: none;min-width: 50px;max-width: 300px" ng-style="(user.username == currentUser) && {'background':'rgba(0, 144, 192, 0.7)','color':'white','float':'right'} " class="panel panel-default ">
+			<div style="padding: 10px; white-space:pre-line" class="panel-body ng-binding " ng-style="(user.username == currentUser) && {'color':'white'} ">  {{user.message}} <span style="font-size: 10px;float: right;padding-top: 5px">&nbsp&nbsp&nbsp{{user.date |date: 'HH:mm'}}</span></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						<div   ng-show="inspiration_tiles[0]" class="options fading">
+								<br>
+								<ul ng-repeat="x in inspiration_tiles">
+
+								 <input style="width:200px" type="button" class="btn btn-primary " ng-click="postDropdowns(x.key)" value="{{x.value}}"> 
+								</ul>
+								<br>
+						</div>
+						</div>
+							
+						<div id="bottom" ></div>
+						<div class="input-group row ng-scope " style=" position: fixed;bottom: 5px;width: 32%">
+							<form ng:submit="postMesg(message)">
+							<input id="data " type="text" ng-model="message " class="form-control " placeholder="Type your message here ">
+							</form>
+							<span class="input-group-btn ">
+								<button class="btn btn-primary " id="datasend " type="button " ng-click="postMesg(message) ">Send!</button>
+							</span>
+						</div>
+					
+					</div>
+     					 <div class="force-overflow"></div>
+    				</div>
+					
+				
+				</div>
+			</div>
+			</div>
+			<div ng-hide="filters" style="float:right;height:100%;width: 65%;">
+					<br>
+					<!--<span style ="font-size: 20px;color: lawngreen" typewrite="" type-delay="100" text="headings" initial-delay="1s" callback-fn="hideWave()" >
+						<span class="blink">|</span>
+					
+					</span>-->
+				<h1 style ="font-size: 20px;margin: 0;display: table">{{headings}} <span style="font-size: 15px;color:lightgray">({{products_list.length}}) </span> </h1>
+			<br>	<div ng-show="displayText[0]"  style=" display: table; margin: 0 auto;font-size: 15px ">
+					 Go for styles {{reason}}.
+
+					  Choose <span style="text-transform:capitalize;"> {{displayText[0].attribute_type.replace("_"," ")}} </span>
+					 like <span >{{values1 }}</span>.
+					  
+					  <span style="text-transform:capitalize;"> {{displayText[1].attribute_type.replace("_"," ")}} </span> 
+					  like <span > {{values2}} </span> 
+					  etc will look good. 
+					  
+					  <span ng-show="values3" style="text-transform:capitalize;"> And when it comes to {{displayText[2].attribute_type.replace("_"," ")}} always pick </span>
+					   <span > {{values3}}</span>.
+				</div>
+<br><br><br>
+			<img  ng-show="no_item" src="no_products_found.jpg" style="margin-left: 250px;margin-top:180px " ></img>
+			<div>
+						<div ng-repeat=" x in products_list" class="load_images">
+						<a href="{{x.landingPageUrl}}" target="_blank"><img vspace="20" style="margin-left: 20px;"
+							src="{{x.style_image.search.imageURL}}" height="280px" width="200px">
+						</a><br>
+						<div class="spans">  
+							<span style="font-weight:bold ;margin-left: 3px;text-overflow:ellipsis;">&nbsp&nbsp{{x.product_filter.brand.toUpperCase().substr(0, 19)}}
+								<span ng-show="x.product_filter.brand.length > 20">...</span>  
+							</span>
+					<br>	<span style="font-weight: lighter;font-size: 11px;" >&nbsp&nbsp&nbsp&nbsp₹{{x.product_filter.discount_price}}.00&nbsp&nbsp&nbsp&nbsp</span>
+							<strike style="font-weight: lighter;font-size: 11px;color: gray" ng-hide="x.product_filter.discount_percent == 0">₹{{x.product_filter.price}}.00</strike>
+							<span style="font-weight: lighter;font-size: 11px;color: #0090c0" ng-hide="x.product_filter.discount_percent == 0" >&nbsp&nbsp&nbsp&nbsp{{x.product_filter.discount_percent}}% Off</span>
+					<br>	<span style="color: gray;font-size: 12px;font-weight:200 ">&nbsp&nbsp&nbsp&nbsp{{x.product_filter.website.toUpperCase()}}</span>
+						</div>
+					
+		</div>
+			</div>
+					
+		</div>
+		
+</body>
+</html>

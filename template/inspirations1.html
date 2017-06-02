@@ -1,0 +1,66 @@
+<div scroll style="font-size: 30px; padding-left: 25px;margin-top:50px;float:right;min-height:630px;width: 69%; background: white">	
+<h2 class="categoty_headings" style="font-weight: 800">WOMEN'S FASHION</h2>
+<p style="margin-top: 15px; font-size: 16px;font-weight: 400;"> Buy from amazing and complete web collection of women western wear dresses that suits your style  </p>
+        
+	<div ng-click="getInspiration(x.id)" style="cursor: pointer;margin: 30px" ng-repeat="x in inspirations">
+		<div  ng-if="($index == 0) || (($index)%5 == 0) && ($index != 1) || ( ( ($index)%5 == 3) && ($last)) || ( (($index)%5 == 1) && ($last)) " style="width: 98%; border: 1.9px solid rgba(212, 204, 204, 0.71);display: inline-flex;margin: 10px;">
+			<div style="   margin-left: 100px;" >
+				<img src="{{x.imageUrl}}" alt="inspiration" height="360px" width="260px">
+			</div>
+			<div style="margin: 5% 3% 0% 10%">
+				<div>
+					<h1 style="text-align: center;font-size: 40px;border-top: 2px solid;padding-top: 15%;color: #615c5c;font-weight: 300;">{{x.heading}}</h1>
+					<button style="margin: 8% 0% 0% 32%;background: black;color: white;font-size: 22px;"> Shop Now </button>
+				</div>
+			</div>
+		</div>
+		<div ng-if="( (($index)%5 == 1) && (!$last))" style="display: flex; height: 362px; margin:15px;    border: 1.9px solid rgba(212, 204, 204, 0.71);margin:10px; width: 43%;font-size: 30px;min-height: 250px">
+			<div style="">
+				<div style="top: 40%;position: relative;padding: 5px">
+					<h1 style="text-align: center;font-size: 15px;border-top: 2px solid;padding-top: 15%;color: #615c5c;font-weight: 300;">{{x.heading}}</h1>
+					<button style="white-space: nowrap;margin-left: 10%;margin: 2% 0% 0% 15%;background: black;color: white;font-size: 11px;"> Shop Now </button>
+				</div>
+			</div>	
+			<div style="" >
+				<img src="{{x.imageUrl}}" alt="inspiration" height="360px" width="260px">
+			</div>
+			
+		</div>
+		<div ng-if="(($index)%5 == 2)" style="display: flex;height: 362px;margin:15px;border: 1.9px solid rgba(212, 204, 204, 0.71);width: 43%;float: right;font-size: 30px;margin-top: -46%;min-height: 250px;">
+					<div style="" >
+				<img src="{{x.imageUrl}}" alt="inspiration" height="360px" width="260px">
+			</div>
+			<div style="">
+				<div style="top: 40%;position: relative;padding: 5px">
+					<h1 style="text-align: center;font-size: 15px;border-top: 2px solid;padding-top: 15%;color: #615c5c;font-weight: 300;">{{x.heading}}</h1>
+					<button style="white-space: nowrap;margin-left: 10%;margin: 2% 0% 0% 15%;background: black;color: white;font-size: 11px;"> Shop Now </button>
+				</div>
+			</div>	
+		</div>
+		<div ng-if="( ( ($index)%5 == 3) && (!$last))" style="margin:15px;    border: 1.9px solid rgba(212, 204, 204, 0.71);    display: inline-flex;width: 45%;margin: 10px;font-size: 30px;min-height: 150px;">
+			<div style=" " >
+				<img src="{{x.imageUrl}}" alt="inspiration" height="260px" width="200px">
+			</div>
+			<div style="margin: 15% 5% 0% 10%">
+				<div>
+					<h1 style="text-align: center;font-size: 15px;border-top: 2px solid;padding-top: 15%;color: #615c5c;font-weight: 300;">{{x.heading}}</h1>
+					<button style="white-space: nowrap;margin-left: 10%;background: black;color: white;font-size: 14px;"> Shop Now </button>
+				</div>
+			</div>	
+		</div>
+		<div ng-if="(($index)%5 == 4) " style=" margin:15px;    border: 1.9px solid rgba(212, 204, 204, 0.71);   width: 45%;display: inline-flex;margin: 10px;float: right;font-size: 30px;margin-top: -36%;min-height: 150px;">
+				
+			<div style="width: 47%">
+				<div style="display: inline-block;padding: 30% 0% 0% 14%;margin: 0 auto;">
+					<h1 style="text-align: center;font-size: 15px;border-top: 2px solid;padding-top: 15%;color: #615c5c;font-weight: 300;">{{x.heading}}</h1>
+					<button style="white-space: nowrap;margin-left: 10%;background: black;color: white;font-size: 14px;"> Shop Now </button>
+				</div>
+			</div>	
+			
+			<div style=" " >
+				<img src="{{x.imageUrl}}" alt="inspiration" height="260px" width="200px">
+			</div>
+		</div>
+	</div>
+
+</div>

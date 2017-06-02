@@ -1,0 +1,51 @@
+
+<div> 
+  <div style="display: inline-flex;width: 90%;padding-left: 10%">
+      <div style="width: 10%;">
+        <div style="padding-top: 20px" ng-repeat="x in product_page.style_image">
+            <img ng-mouseover="changeImage(x.imageURL)" src="{{x.imageURL}}" alt="image" width="80px" height="100px">
+        </div>
+      </div>
+
+      <div style="padding: 5% 0% 0% 10%;">
+        <img id="display_image" src="{{product_page.image}}" alt="imageURL" width="350px" height="500px">
+      </div>
+
+      <div style="width: 40%;padding-left: 10%;">
+        <h4 style="color: lightgray">
+          {{product_page.product_filter.display_name}}
+        </h4>
+        <br>
+        <h4>Rs.{{product_page.product_filter.discount_price}}</h4>
+         <hr style="    border-top: 1px solid #74757f;">
+        <h5 style="font-weight: bold">Available sizes</h5>
+        <br>
+        <h5> <span ng-style="(product_page.product_filter.size_availability[$index]) && {'font-weight':'bold'}" ng-repeat="x in product_page.product_filter.all_size" style="padding-right:20px ">{{x}}</span> 
+        </h5>
+
+          <br><br>
+          <a href="{{product_page.landingPageUrl}}" target="_blank">
+          <button class="btn btn-primary"> BUY ON {{product_page.product_filter.website.toUpperCase()}} </button>
+          </a>
+           <hr style="    border-top: 1px solid #74757f;">
+          <h5 style="font-weight: bold">Product description</h5>
+          <h6 style="line-height: 1.5em">{{product_page.product_filter.product_desription}}</h6>
+
+      </div>
+  </div>
+
+  <div style="display: inline-flex;width: 90%;padding-left: 10%">
+
+        <div style="padding: 5% 0% 0% 30%;width: 60%">
+               <h5 style="font-weight: bold">Product Benefits </h5>
+               <hr style="    border-top: 1px solid #74757f;">
+               <table>
+                 <tr ng-repeat="x in product_page.benefits "> 
+                    <td style="text-transform: capitalize;white-space: nowrap;padding: 10px">{{x}}</td>
+                 </tr>
+               </table>
+        </div>
+
+        
+  </div>
+</div>

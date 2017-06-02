@@ -1,0 +1,336 @@
+<div class="category_page_dresses" class="container"
+     style="background-image: none;background-color: #fff;background:#fff;border:none;">
+    <!--div-- ng-show="productline_name && (!showload)">
+        <div style="width:100%;padding: 0px 50px" ng-show="web_structure_show_factors">
+            <div class="row">
+                <h1>SHOP BY PRODUCT FACTORS</h1>
+            </div>
+            <div class="row">
+                <div ng-repeat="obj in web_structure_list_level_1">
+                    <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                    <div class="col-md-4">
+                        <img src="pics/web_structure/{{obj['title']}}.png" style='width: 100%; height: auto; object-fit: contain'>
+                        <ul class="product_factor_ul list-group">
+                            <a target="_self" href="/find/{{item['adjective_value'] | underscoreless}}-{{productline_name| custtrim}}" ng-click="web_structure_show_factors = 0" class="list-group-item" ng-repeat="item in obj['list']">
+                                {{item["adjective_display"] | capitalize}}
+                            </a>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="pics/web_structure/brands.png" style='width: 100%; height: auto; object-fit: contain'>
+                        <a target="_self" href="/find/{{productline_name | custtrim}}" class="list-group-item" ng-click="web_structure_show_brands = 1; web_structure_show_factors = 0">
+                            See all brands
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width:100%; padding: 0px 50px" ng-show="web_structure_show_brands">
+            <div class="row">
+                <h1>SHOP BY BRANDS</h1>
+            </div>
+            <div class="row">
+
+            </div>
+        </div>
+    </div-->
+
+    <div ng-show="productline_name && (!showload)">
+        <br>
+        <h1 ng-if="(user_selected_categories.occasion=='') || (user_selected_categories.age == '') || (user_selected_categories.body_shape == '')
+            || (user_selected_categories.height == '') ||  (user_selected_categories.skin_color == '')"
+            style="text-transform: uppercase;padding: 0px;margin: 0px;">{{productline_name}} STORE </h1><br>
+
+        <div class="row" style="border:none;padding: 0px;margin: 0px;">
+            <div ng-if="!(selected_shopby == 'web') && (user_selected_categories.occasion=='')" class="category_sbo row"
+                 style="padding: 0px;margin: 0px;">
+                <h3 style="padding: 0px;margin: 0px;padding-left: 2%;" id="occasion_heading" class="category_heading">
+                    SHOP {{productline_name}}
+                    <span ng-if="(user_selected_categories.age!='') ||  (user_selected_categories.body_shape!='') || (user_selected_categories.skin_color!='') || (user_selected_categories.height!='')">
+                    FOR
+                    <span ng-if="user_selected_categories.age!='' "> {{user_selected_categories.age}} </span>
+                    <span ng-if="user_selected_categories.body_shape!='' "> {{user_selected_categories.body_shape | removehiphen}} </span>
+                    <span ng-if="user_selected_categories.height!='' "> {{user_selected_categories.height | removehiphen}} </span>
+                    <span ng-if="user_selected_categories.skin_color!='' "> {{user_selected_categories.skin_color | removehiphen}} </span> WOMEN
+                </span>
+                    BY OCCASION</h3>
+            </div>
+            <div style=" border:none;">
+                <div style="cursor: pointer;display: inline-block;border:none;padding: 2%;"
+                     ng-repeat="x in occasions" class="col-lg-4 col-md-6 col-xs-12 col-sm-12">
+                    <a target="_self"
+                       href="/find/{{x | underscoreless}}-{{productline_name | custtrim}}-for{{user_selected_categories.age}}{{user_selected_categories.height}}{{user_selected_categories.body_shape}}{{user_selected_categories.skin_color}}-women">
+                        <img src="pics/dress_store/occasion/{{x}}.png" alt="{{x}}" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-if="!(selected_shopby == 'age') && (user_selected_categories.age == '')"
+             class="category_sba"
+             style="border:none;padding: 0px;margin: 0px;">
+
+            <h3 id="age_heading" class="category_heading" style="padding: 0px;margin: 0px;padding-left: 2%;"> SHOP
+                <span ng-if="user_selected_categories.occasion!='' "> {{user_selected_categories.occasion | removehiphen}} </span>
+                {{productline_name}}
+                <span ng-if="(user_selected_categories.age!='') ||  (user_selected_categories.body_shape!='') || (user_selected_categories.skin_color!='')|| (user_selected_categories.height!='')">
+                    FOR
+                    <span ng-if="user_selected_categories.body_shape!='' "> {{user_selected_categories.body_shape | removehiphen}} </span>
+                    <span ng-if="user_selected_categories.height!='' "> {{user_selected_categories.height | removehiphen}} </span>
+                    <span ng-if="user_selected_categories.skin_color!='' "> {{user_selected_categories.skin_color | removehiphen}} </span>WOMEN
+                </span>
+                BY AGE</h3>
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="border:none;padding: 2%;">
+                <a target="_self"
+                   href="/find/{{user_selected_categories.occasion | replacespace  }}{{productline_name  }}-for{{user_selected_categories.height}}{{user_selected_categories.body_shape}}{{user_selected_categories.skin_color}}-18-27-women"
+                   style="cursor: pointer;border:none;">
+                    <img src="/pics/dress_store/age/teenage.png" style="border:none;width: 100%;padding: 2%;"
+                         class="img-responsive">
+                </a>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="border:none;padding: 2%;">
+                <a target="_self"
+                   href="/find/{{user_selected_categories.occasion | replacespace  }}{{productline_name  }}-for{{user_selected_categories.height}}{{user_selected_categories.body_shape}}{{user_selected_categories.skin_color}}-28-38-women"
+                   style="cursor: pointer;border:none;">
+                    <img src="/pics/dress_store/age/adult.png" style="border:none;width: 100%;padding: 2%;"
+                         class="img-responsive">
+                </a>
+            </div>
+        </div>
+        <div class="row" ng-if="!(selected_shopby == 'body_shape') && (user_selected_categories.body_shape == '')"
+             class="category_sbbs" style="border:none;padding: 0px;margin: 0px;">
+            <h3 id="body_shape_heading" class="category_heading" style="padding: 0px;margin: 0px;padding-left: 2%;">SHOP
+                <span ng-if="user_selected_categories.occasion!='' "> {{user_selected_categories.occasion | removehiphen}} </span>
+                {{productline_name}}
+                <span ng-if="(user_selected_categories.age!='') ||  (user_selected_categories.body_shape!='') || (user_selected_categories.skin_color!='')|| (user_selected_categories.height!='')">
+                    FOR
+                    <span ng-if="user_selected_categories.age!='' "> {{user_selected_categories.age}} </span>
+                    <span ng-if="user_selected_categories.height!='' "> {{user_selected_categories.height | removehiphen}} </span>
+                    <span ng-if="user_selected_categories.skin_color!='' "> {{user_selected_categories.skin_color | removehiphen}} </span>WOMEN
+                </span>
+                BY BODY SHAPE</h3>
+            <div style="border:none;">
+                <div style="cursor: pointer;border:none;padding: 2%;"
+                     ng-repeat="x in ['rectangle','apple','pear','hour-glass']"
+                     class="col-lg-3 col-md-6 col-xs-12 col-sm-12">
+                    <a target="_self"
+                       href="/find/{{user_selected_categories.occasion | replacespace }}{{productline_name | custtrim}}-for{{user_selected_categories.height}}{{user_selected_categories.age}}{{user_selected_categories.skin_color}}-{{x}}-women">
+                        <img style="border:none;" alt="x" max-height="350px" src="pics/dress_store/body_shape/{{x}}.png"
+                             max-width="170px" class="img-responsive">
+                    </a>
+                    <h4 style="text-transform: uppercase">{{x}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="!(selected_shopby == 'height') && (user_selected_categories.height == '')"
+             style="border:none;padding: 0px;margin: 0px;"
+             class="category_sba" style="">
+            <h3 id="height_heading" class="category_heading" style="padding: 0px;margin: 0px;padding-left: 2%;">SHOP
+                <span ng-if="user_selected_categories.occasion!='' "> {{user_selected_categories.occasion | removehiphen}} </span>
+                {{productline_name}}
+                <span ng-if="(user_selected_categories.age!='') ||  (user_selected_categories.body_shape!='') || (user_selected_categories.skin_color!='')|| (user_selected_categories.height!='')">
+                    FOR
+                    <span ng-if="user_selected_categories.age!='' "> {{user_selected_categories.age | removestarthiphen}} </span>
+                    <span ng-if="user_selected_categories.body_shape!='' "> {{user_selected_categories.body_shape | removehiphen}} </span>
+                    <span ng-if="user_selected_categories.skin_color!='' "> {{user_selected_categories.skin_color | removehiphen}} </span>WOMEN
+                </span>
+                BY HEIGHT</h3>
+            <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12" style="border:none;padding: 2%;">
+                <a target="_self"
+                   href="/find/{{user_selected_categories.occasion | replacespace  }}{{productline_name | custtrim}}-for{{user_selected_categories.age}}{{user_selected_categories.body_shape}}{{user_selected_categories.skin_color}}-short-women"
+                   style="cursor: pointer;">
+                    <img src="/pics/dress_store/height/short.png" style="border:none;width: 100%;"
+                         class="img-responsive">
+                </a>
+            </div>
+            <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12" style="border:none;padding: 2%;">
+                <a target="_self"
+                   href="/find/{{user_selected_categories.occasion | replacespace }}{{productline_name | custtrim}}-for{{user_selected_categories.age}}{{user_selected_categories.body_shape}}{{user_selected_categories.skin_color}}-tall-women"
+                   style="cursor: pointer;">
+                    <img src="/pics/dress_store/height/tall.png" style="border:none;width: 100%;"
+                         class="img-responsive">
+                </a>
+            </div>
+        </div>
+
+        <div class="row" ng-if="!(selected_shopby == 'skin_colour') && (user_selected_categories.skin_color == '')"
+             class="category_sba" style="border:none;padding: 0px;margin: 0px;">
+
+            <h3 class="category_heading" style="margin: 0px;padding: 0px;padding-left: 2%;">SHOP
+                <span ng-if="user_selected_categories.occasion!='' " style="padding: 0px;margin: 0px;"> {{user_selected_categories.occasion | removehiphen}} </span>
+                {{productline_name}}
+                <span ng-if="(user_selected_categories.age!='') ||  (user_selected_categories.body_shape!='') || (user_selected_categories.skin_color!='')|| (user_selected_categories.height!='')">
+                    FOR
+                    <span ng-if="user_selected_categories.age!='' "> {{user_selected_categories.age | removestarthiphen}} </span>
+                    <span ng-if="user_selected_categories.body_shape!='' "> {{user_selected_categories.body_shape | removehiphen}} </span>
+                    <span ng-if="user_selected_categories.height!='' "> {{user_selected_categories.height | removehiphen}} </span>WOMEN
+                </span>
+                BY SKIN TONE</h3>
+            <div style="border:none;padding: 2%;">
+                <div style="border:none;" ng-repeat="x in ['fair','wheatish','dusky']"
+                     class="col-lg-4 col-md-6 col-xs-12 col-sm-12">
+                    <a target="_self"
+                       href="/find/{{user_selected_categories.occasion | replacespace  }}{{productline_name | custtrim}}-for{{user_selected_categories.age}}{{user_selected_categories.body_shape}}{{user_selected_categories.height}}-{{x}}-women"
+                       style="cursor: pointer;">
+                        <img src="/pics/dress_store/skintone/{{x}}.png" style="border:none;" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div scroll2 style="margin-bottom: 100px"></div>-->
+</div>
+
+<div ng-show="!productline_name" style="background-image: none;background-color: #fff;background:#fff;border:none;">
+    <div class="container" style="padding-left: 0%; padding-right: 2%;width: 100%;">
+        <h1 style="font-weight: 600; padding: 13px;">SHOP BY CATEGORIES </h1>
+        <h2 style="font-weight: 500;">Western Wear</h2>
+        <div class="row">
+            <div class="col-lg-6 col-xs-12 col-md-6" style="padding: 2%;">
+                <div class="display_image_text img-responsive"
+                     style="height: 320px; width: 100%; background-image: url('../pics/bottomwear.png');">
+                        <span style="color: white; padding: 5px 35px 5px 35px; font-family: 'Lato', sans-serif; font-size: 42px; font-weight: 400;">
+                            Topwear</span>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-xs-6" style="padding-top: 2%;">
+                        <ul class="cat_list">
+                            <a target="_self" href="{{website}}/find/women-dresses">
+                                <li style="border-top: 1px solid #b7b7b7;text-decoration: none">Dresses<span> > </span>
+                                </li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-kurtas">
+                                <li>Kurtas<span> > </span></li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-tops">
+                                <li>Tops<span> > </span></li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-t-shirts">
+                                <li>T-shirts<span> > </span></li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-shirts">
+                                <li>Shirts<span> > </span></li>
+                            </a>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-10" style="padding-top: 2%;">
+                        <ul class="cat_list">
+                            <a target="_self" href="{{website}}/find/women-jackets">
+                                <li style="border-top: 1px solid #b7b7b7;">Jackets<span> > </span></li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-blazers">
+                                <li>Blazers<span> > </span></li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-sweaters">
+                                <li>Sweaters<span> > </span></li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-sweatshirts">
+                                <li>Sweatshirts<span> > </span></li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-jumpsuits">
+                                <li>Jumpsuits<span> > </span></li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-6" style="padding: 2%;">
+                <div class="display_image_text"
+                     style="height: 320px; width: 100%; background-image: url('../pics/topwear.png');">
+                        <span style="color: white; padding: 5px 35px 5px 35px; font-family: 'Lato', sans-serif; font-size: 42px; font-weight: 400;">
+                            Bottomwear</span>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-xs-10" style="padding-top: 2%;">
+                        <ul class="cat_list">
+                            <a target="_self" href="{{website}}/find/women-jeans">
+                                <li style="border-top: 1px solid #b7b7b7;">Jeans<span> > </span></li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-skirts">
+                                <li>Skirts<span> > </span></li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-shorts">
+                                <li>Shorts<span> > </span></li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-trousers">
+                                <li>Trousers<span> > </span></li>
+                            </a>
+                            <a target="_self" href="{{website}}/find/women-capris">
+                                <li>Capris<span> > </span></li>
+                            </a>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-10" style="padding-top: 2%;">
+                        <ul class="cat_list">
+                            <a target="_self" href="{{website}}/find/women-jeggings">
+                                <li style="border-top: 1px solid #b7b7b7;">Leggings<span> > </span></li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footwear" style="padding: 2%;">
+            <h2 style="font-weight: 500;">Footwear</h2>
+            <div class="row" style=" padding-top: 2%;">
+                <div class="col-lg-3 col-xs-6 col-md-3" style="text-align: center;">
+                    <a target="_self" href="#">
+                        <img src="../pics/footwear/Sports.png"
+                             style="height: 100%; width: 100%;border: 1px solid #b7b7b7;">
+                        Sports
+                    </a>
+                </div>
+                <div class="col-lg-3 col-xs-6 col-md-3" style="text-align: center;">
+                    <a target="_self" href="{{webiste}}/find/heels" target="_self">
+                        <img src="../pics/footwear/heels.png"
+                             style="height: 100%; width: 100%;border: 1px solid #b7b7b7;">
+                        Heels
+                    </a>
+                </div>
+                <div class="col-lg-3 col-xs-6 col-md-3" style="text-align: center;">
+                    <a target="_self" href="{{webiste}}/find/casual-shoes" target="_self">
+                        <img src="../pics/footwear/Casuals.png"
+                             style="height: 100%; width: 100%;border: 1px solid #b7b7b7;">
+                        Casual Shoes
+                    </a>
+                </div>
+                <div class="col-lg-3 col-xs-6 col-md-3" style="text-align: center;">
+                    <a target="_self" href="{{webiste}}/find/flats" target="_self">
+                        <img src="../pics/footwear/flats.png"
+                             style="height: 100%; width: 100%;border: 1px solid #b7b7b7;">
+                        Flats
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="accessories" id="accessories" style="padding-left: 3%; padding-top: 3%; padding-bottom: 0%;">
+            <h2 style="font-weight: 500;">Accessories</h2>
+            <div class="row" style=" padding-top: 2%;">
+                <div class="col-lg-4 col-xs-4 col-md-4" style="text-align: center;">
+                    <a target="_self" href="{{webiste}}/find/handbags" target="_self">
+                        <img src="../pics/accessories/handbags.png"
+                             style="height: 100%; width: 100%;border: 1px solid #b7b7b7;">
+                        Handbags
+                    </a>
+                </div>
+                <div class="col-lg-4 col-xs-4 col-md-4" style="text-align: center;">
+                    <a target="_self" href="#">
+                        <img src="../pics/accessories/watches.png"
+                             style="height: 100%; width: 100%;border: 1px solid #b7b7b7;">
+                        Watches
+                    </a>
+                </div>
+                <div class="col-lg-4 col-xs-4 col-md-4" style="text-align: center;">
+                    <a target="_self" href="#">
+                        <img src="../pics/accessories/glasses.png"
+                             style="height: 100%; width: 100%;border: 1px solid #b7b7b7;">
+                        Glasses
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div scroll2 style="margin-bottom: 0px"></div>
+</div>

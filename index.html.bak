@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html ng-app="myApp" lang="en" class="no-js" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
+<head data-ng-app="app">
+    <meta charset="utf-8">
+    <meta name="verify-admitad" content="ed499e6bac"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="wot-verification" content="591de88d2ae5d58564c7"/>
+
+    <title ng-bind="title">"Online shopping site | Women fashion | Personal styling - Selekt"</title>
+    <link rel="icon" href="/pics/favicon.png">
+    <meta name="description" content="{{meta_desc}}">
+    <meta itemprop="description" content="Application wide description for Schema.org (Google+ uses this)">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="{{canonical_url}}">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="bower_components/dist/angular-typewrite.css"/>
+    <link rel="stylesheet" href="css/isteven-multi-select.css"/>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/select-css.css">
+    <link rel="stylesheet" href="css/style_find.css">
+    <link rel="stylesheet" href="css/select-css-compact.css">
+    <link rel="stylesheet" href="css/searchSelect.css">
+    <link rel="stylesheet" href="css/style_load.css">
+    <!-- <link rel="stylesheet" href="css/popup.css"> -->
+<style type="text/css">
+ #ac-wrapper {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(255,255,255,.6);
+z-index: 1001;
+}
+#popup{
+width: 555px;
+height: 375px;
+background: #FFFFFF;
+border: 5px solid #000;
+border-radius: 25px;
+-moz-border-radius: 25px;
+-webkit-border-radius: 25px;
+box-shadow: #64686e 0px 0px 3px 3px;
+-moz-box-shadow: #64686e 0px 0px 3px 3px;
+-webkit-box-shadow: #64686e 0px 0px 3px 3px;
+position: relative;
+top: 350px; left: 375px;
+}
+</style>
+   
+
+    <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-select.css">
+    <link rel="stylesheet" href="bower_components/ngModal/ng-model.css">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-92766347-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+
+        .main_banner {
+            background-image: url('pics/banner.png');
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: block;
+            overflow-x: hidden;
+            background-size: 1600px 900px;
+
+        }
+
+
+    </style>
+
+    <base href="/"/>
+</head>
+<body class="main_banner">
+
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div  class="">
+    <div ng-view>
+
+    </div>
+</div>
+
+
+<!--In production use:-->
+<!--
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
+-->
+
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="js/angular-ismobile.min.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="node_modules/socket.io/socket.io.js"></script>
+<!--<script src="bower_components/socket.io-client/socket.io.js"></script>-->
+<!--<script src="bower_components/angular-socket-io/socket.js"></script>-->
+
+
+<script src="js/angular-searchAndSelect.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+<script src="product-app-services/app-services.js"></script>
+<script src="publish/wedding-dresses-for-women/product-chat.js"></script>
+<script src="publish/home/product-chat.js"></script>
+<script src="publish/search/product-chat.js"></script>
+<script src="publish/find/product-chat.js"></script>
+
+
+<script src="app-services/app.module.js"></script>
+<script src="app.js"></script>
+<script src="bower_components/angular-typewrite/dist/angular-typewrite.js"></script>
+<!--//custom dialog-->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/bootbox/bootbox.js"></script>
+<script src="bower_components/ngBootbox/dist/ngBootbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</body>
+</html>
