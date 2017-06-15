@@ -1,0 +1,113 @@
+<!--
+ * Created by chinmesh on 8-6-17.
+-->
+
+<!-- Created by chinmesh on 8-6-17. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Hello world </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Bootply">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- <link rel="stylesheet" href="css/style_find.css"> now present in css/all_style_css.css -->
+    <!-- <link rel="stylesheet" href="css/jasny-bootstrap.min.css">  now present in css/all_third_party_css.css -->
+
+    <!--<link rel="stylesheet" href="../../css/all_third_party_css.css" type='text/css'> -->
+    <link rel="stylesheet" href="../../css/all_style_css.css" type='text/css'> 
+    <link rel="stylesheet" href="../../css/all_custom_css.css" type='text/css'>
+    <script type="text/javascript">
+
+    /*
+      $(window).scroll(function() {
+            event.preventDefault();
+        var d2 = document.getElementById("div2");
+        var inp_f = document.getElementById("inp_field");
+        var gt = document.getElementById("gotoTop");
+        var foot = document.getElementById("foot");
+        var ref = document.getElementById("refresh");         
+
+            if($(window).scrollTop() >=1350) {
+        gt.style.display='block';
+             }
+         else{
+        gt.style.display='none';
+            }
+
+        var height = foot.offsetHeight;
+   if($(window).scrollTop() + $(window).height() +height >= $(document).height()) {
+        var h=$(window).scrollTop() + $(window).height() +height -$(document).height();
+        d2.style.bottom= h -2+ 'px';
+        inp_f.style.bottom=h -2+ 'px';
+        //alert('doc'+$(document).height()+'window'+$(window).height());
+        ref.style.top=$(window).height()/1.5 - h + 'px';
+
+   }
+   else{
+            d2.style.bottom="0px";
+            inp_f.style.bottom="0px"
+            ref.style.top="50vh";
+
+   }
+});
+
+  */
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>
+<body cz-shortcut-listen="true" style="background: white">
+<div ng-show="show_overlay" class="offcanvas-overlay" ng-click="show_overlay = 0; offcanvas_show_profile = 1; offcanvas_show_edit = 0">
+</div>
+<div ng-show="!show_page">
+    <div class="loader" style="position: fixed; left: 50%; top: 50%; ">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div id="main_page" ng-show="show_page" style="background-image: none;background-color: #fff;background:#fff;border:none;" >
+    <nav_header></nav_header>
+
+    <div class="container" id="cont" style="background-color: #fff;background:none;background-image: none;" >
+        <div ng-show="shop_by_brands_dir" class="row" style="padding-top: 62px;">
+            <shop-by-brands></shop-by-brands>
+        </div>
+
+        <div ng-show="!shop_by_brands_dir" class="row "  style="padding-top: 62px;padding-right: 0px;padding-left: 0px; margin-top : 50px ;" >
+            <div class="col-lg-1  col-md-1 col-sm-1" >
+            </div>
+
+            <div  class="col-lg-10  col-md-10 col-sm-10 "  id="div1" >
+                <!--<inspirations ng-show="inspirations_dir"></inspirations>-->
+                <product-list-content ng-show="product_list_content_dir"></product-list-content>
+                <product-page-content ng-show="product_page_content_dir"></product-page-content>
+                
+                <hr style="margin-bottom: 40px; border: 2px solid #eee">
+               
+                <!-- this section is not required in product page
+                <div id="categories" style="">
+                    <category-page></category-page>
+                </div>
+                -->
+
+            </div>
+
+            <div  class="col-lg-1  col-md-1 col-sm-1 " ></div>
+
+        </div>
+        <div class="row" style="position: absolute;padding: 0px;margin: 0px;" class="row">
+            <footer-div></footer-div>
+            <div id="gotoTop" ng-click="gototop()" style="background:none;border: none;box-shadow: none;">
+                <img src="../pics/arrow_up.png" style="font-family: 'Lato';padding-bottom: 0; margin-bottom: 0; line-height: 1;background: white;border-radius: 100%; " class="img-responsive">
+
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

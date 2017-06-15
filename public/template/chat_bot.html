@@ -1,0 +1,906 @@
+<div ng-show="chat" ng-style="(boolChangeClass)? 'chat_content_absolute':'chat_content_fixed'" id="chat_box" class="chatfont"
+     style="padding: 0px;margin: 0px;">
+    <i class=" fa fa-spin fa-refresh fa-5x" id="loader" style="display: none;"></i>
+    <div style=" z-index: 1;float: left;position: relative;left: -2vw;"
+         ng-style="(boolChangeClass)?{'position':'absolute'}:{'position':'fixed'}"
+         class=" row ng-scope">
+        <div ng-show="0" ng-class="boolChangeClass ? 'chat_header_table_absolute' : 'chat_header_table_fixed'">
+            <button ng-click="resetChat('clear')" class="btn_reset"
+                    style="float: right;padding-left: 0%;padding-right: 3%;padding-top: 0px;height: 26px;"
+                    id="datasend " type="button">Reset Chat<img src="../static/pics/icons/resetbutton.png"
+                                                                class="img-responsive"
+                                                                style="height: 26px; float: left; border-radius: 4px;margin-right: 5px; "
+                                                                class="icon_reset"></button>
+            <!--<img src="static/pics/v_line.png" style="float: right;border: none;height: 50px;width: 0.4px;margin-right:10px">-->
+        </div>
+        <div ng-class="boolChangeClass ? 'chat_header_table_absolute' : 'chat_header_table_fixed'">
+
+            <button ng-click="resetChat('clear');Event('resetChat');" class="btn_reset"
+                    style="float: right;padding-left: 0%;padding-right: 3%;padding-top: 0px;height: 26px;"
+                    id="datasend " type="button">Reset Chat<img src="../static/pics/icons/resetbutton.png"
+                                                                class="img-responsive" style="height: 26px; float: left;    border-radius: 4px;margin-right: 5px;
+                                     " class="icon_reset"></button>
+
+
+            <button ng-disabled="showtype" ng-show="!view_profile_message || undo_tag "  ng-click="undo();Event('undo');"   class="filter btn_undo" id="datasend" style=" float: right;padding-right: 3%;padding-top: 0%;margin-top:5% ;height: 26px;    font-size: 16px;background:none;background-color: #5DCCCD;  " type="button">Undo<img src="../static/pics/icons/undo.png"
+                               style="float: left;border: none;height: 26px;    border-radius: 4px;margin-right: 5px;
+                                " class="icon_undo"></button>
+
+            <!--<img src="static/pics/v_line.png" style="float: right;border: none;height: 50px;width: 0.4px;margin-right:10px">-->
+        </div>
+    </div>
+<chat-filter ng-show="show_filter || show_all_filters" class="filter_total"></chat-filter>
+<chat-benefits ng-show="show_all_benefits" class="filter_total"></chat-benefits>
+<div ng-show="!show_filter"
+	style="background:#eeeeee;background-image: none; padding: 0px;margin: 0px;height: 100vh;width: 27vw;padding-top: 3.8%;margin-top: 0px;max-width: 30%;"
+     ng-style="boolChangeClass && {'top':'{{set_top}}px'}"
+     ng-class="(boolChangeClass)?'chat_content_absolute':'chat_content_fixed' " class="row ng-scope"
+     class="chatfont" scroll-bottom="users">
+    <div class="chatfont" class="row ng-scope">
+        <div class="scrollbar " id="style-1">
+            <div ng-show='getCnf' style="margin: 10px">
+                <div class="row " id="userList" style="display: block;">
+
+                    <!-- Uncomment the next two divs to get the ua and bc at the top of chat if submitted>
+                    <div ng-show="show_ua" class="fading col-sm-12">
+                        <div class="row">
+                            <div style="animation-delay: 10s; padding-right: 2px" class="col-xs-9">
+                                <div style="background-color:rgba(255, 255, 255, 1);  border: none;min-width: 150px"
+                                     class="panel panel-default ">
+                                    <div style="padding: 6px; padding-top: 22px; font-size: 14px;font-family: 'lato'"
+                                         class=" panel-body ng-binding">
+                                        As per our records your profile is:<br>
+                                        Age: {{ua_age|capitalize}}<br>
+                                        Height: {{ua_height|capitalize}}<br>
+                                        Bodyshape: {{ua_bodyshape|capitalize}}<br>
+                                        Skintone: {{ua_skintone|capitalize}}<br>
+                                        <button ng-click="edit_ua()" class="ua_form_reset btn">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="show_bc" class="fading col-sm-12">
+                        <div class="row">
+                            <div style="animation-delay: 10s; padding-right: 2px" class="col-xs-9">
+                                <div style="background-color:rgba(255, 255, 255, 1);  border: none;min-width: 150px"
+                                     class="panel panel-default ">
+                                    <div style="padding: 6px; padding-top: 22px; font-size: 14px;font-family: 'lato'"
+                                         class=" panel-body ng-binding">
+                                        As per our records you have the following body concerns:<br>
+                                        <div ng-repeat="bc in active_bc">
+                                            {{bc | capitalize | underscoreless}}<br>
+                                        </div>
+                                        <button ng-click="edit_bc()" class="ua_form_reset btn">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div-->
+
+                    <div ng-show="view_profile_message" class="fading col-sm-12">
+                        <div class="row">
+                            <div style="animation-delay: 10s; padding-right: 2px" class="col-xs-9">
+                                <div style="background-color:rgba(255, 255, 255, 1);  border: none;min-width: 150px"
+                                     class="panel panel-default  talk-bubble tri-right left-top">
+                                    <div style="padding: 6px; padding-top: 22px; font-size: 14px;font-family: 'lato'"
+                                         class=" panel-body ng-binding">
+                                        Take a look at your stored profile<br>
+                                        <button ng-click="show_overlay = 1" data-toggle="offcanvas"
+                                                data-target="#off-canvas" class="ua_form_reset btn">View Profile
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-repeat="user in ini_users" class="fading col-sm-12 ng-scope">
+                        <div class="row" ng-if="user">
+                            <div class="col-xs-3"
+                                 ng-class="{'col-xs-push-9' : !(user.username == currentUser)}">
+                            </div>
+                            <div style="animation-delay: 10s;padding-right: 2px; "
+                                 class="col-xs-9"
+                                 ng-class="{'col-xs-pull-3' : !(user.username == currentUser)}">
+                                <div style="background-color:rgba(255, 255, 255, 0.9);  border: none;min-width: 150px;"
+                                     ng-style="(user.username == currentUser) && {'background':'#5DCCCD','color':'white','float':'right','margin-right':'6%','border-radius': '5px','padding-left':'2%'} ||
+                                      (user.username != currentUser) && {'border-radius': '5px','border-top-left-radius':'0px'} " ng-class="{'talk-bubble tri-right left-top' : (user.username != currentUser),
+                                'talk-bubble1 tri-left right-top' : (user.username == currentUser)}"
+                                     class="panel panel-default ">
+
+                                    <div style="padding: 5px; white-space:pre-line;font-size: 14px;font-family: 'lato';"
+                                         class=" panel-body ng-binding "
+                                         ng-style="(user.username == currentUser) && {'color':'white'}">{{user.message}}<span
+                                            style="font-size: 8px;float: right;padding-top: 5px;">&nbsp&nbsp&nbsp{{user.date |date: 'HH:mm'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ua_form" ng-show="show_ua_form && first_query_sent"
+                         class="fading col-sm-12"
+                         style="margin-top: 10px">
+                        <div class="row ">
+                            <div style="animation-delay: 10s; padding-right: 2px"
+                                 class="col-xs-9">
+                                <div style="background-color:rgba(255, 255, 255, 1);  border: none;min-width: 150px;margin: 0px;"
+                                     class="panel panel-default talk-bubble tri-right left-top">
+                                    <div style="padding: 6px; padding-top: 22px; font-size: 14px;font-family: 'lato'"
+                                         class=" panel-body ng-binding">
+                                        Tell us more about yourself
+                                        <form class="form-inline ua_form">
+                                            <br>Select Age-<br>
+                                            <button ng-style="(active_age=='18-27')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="age_18-27"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;">18-27
+                                            </button>
+                                            <button ng-style="(active_age=='28-38')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="age_28-38"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;">28-38
+                                            </button>
+                                            <button ng-style="(active_age=='39+')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="age_39+"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;">39+
+                                            </button>
+                                            <br><br>Select Height-<br>
+                                            <button ng-style="(active_height=='short')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="height_short"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;">Short
+                                            </button>
+                                            <button ng-style="(active_height=='average')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="height_average"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;">Average
+                                            </button>
+                                            <button ng-style="(active_height=='tall')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="height_tall"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;">Tall
+                                            </button>
+                                            <br><br>Select Skintone-
+                                            <!--Modal box trigger-->
+                                            <a class="helptext_trigger pull-right" data-toggle="modal"
+                                               data-target="#skintone_modal"><span
+                                                    class="glyphicon glyphicon-question-sign"></span></a>
+                                            <br>
+                                            <button ng-style="(active_skintone=='fair')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="skintone_fair"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;" id="skintone_fair">
+                                                Fair
+                                            </button>
+                                            <button ng-style="(active_skintone=='dark')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="skintone_dark"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;" id="skintone_dark">
+                                                Dark
+                                            </button>
+                                            <button ng-style="(active_skintone=='wheatish')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="skintone_wheatish"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;"
+                                                    id="skintone_wheatish">Wheatish
+                                            </button>
+                                            <br><br>Select Bodyshape-
+                                            <!--Modal box trigger-->
+                                            <a class="helptext_trigger pull-right" data-toggle="modal"
+                                               data-target="#bodyshape_modal"><span
+                                                    class="glyphicon glyphicon-question-sign"></span></a>
+                                            <br>
+                                            <button ng-style="(active_bodyshape=='rectangle')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="bodyshape_rectangle"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;"
+                                                    id="bodyshape_rectangle">Rectangle
+                                            </button>
+                                            <button ng-style="(active_bodyshape=='pear')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="bodyshape_pear"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;" id="bodyshape_pear">
+                                                Pear
+                                            </button>
+                                            <button ng-style="(active_bodyshape=='apple')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="bodyshape_apple"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;"
+                                                    id="bodyshape_apple">Apple
+                                            </button>
+                                            <button ng-style="(active_bodyshape=='hourglass')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control" value="bodyshape_hourglass"
+                                                    ng-click="set_ua_prop($event.target.value) ; ref = 1 ;"
+                                                    id="bodyshape_hourglass">Hourglass
+                                            </button>
+                                            <br>
+                                            <button type="submit" class="btn btn-primary ua_form_submit"
+                                                    ng-click="send_ua_prop()" style="font-weight: bold;width: 40%;">
+                                                Submit
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="show_ua_edit && !show_ua" class="fading col-sm-12"
+                         style="margin-top: 10px">
+                        <div class="row">
+                            <div class="col-xs-3">
+                            </div>
+                            <div style="animation-delay: 10s; padding-right: 2px"
+                                 class="col-xs-9">
+                                <div style="background-color:#5dcccd; border: none;min-width: 150px ;margin-right: 6%; "
+                                     class="panel panel-default talk-bubble1 tri-left right-top">
+                                    <div style="color:#fff; padding: 6px; padding-top: 22px; font-size: 14px;font-family: 'lato'"
+                                         class=" panel-body ng-binding">
+                                        You have submitted the following profile:<br>
+                                        Age: {{ua_age|capitalize}}<br>
+                                        Height: {{ua_height|capitalize}}<br>
+                                        Bodyshape: {{ua_bodyshape|capitalize}}<br>
+                                        Skintone: {{ua_skintone|capitalize}}<br>
+                                        <div class="bc_form_submit">
+                                            <button ng-click="edit_ua_and_bc()" style="display:inline-block"
+                                                    class="btn ua_form_edit">
+                                                Edit
+                                            </button>
+                                        </div>
+                                        <div style="text-align: center;">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bc_form" ng-show="show_bc_form && first_query_sent"
+                         style="margin-top: 10px" class="fading col-sm-12">
+                        <div class="row">
+                            <div style="animation-delay: 10s; padding-right: 2px"
+                                 class="col-xs-9">
+                                <div style="background-color:rgba(255, 255, 255, 1);  border: none;min-width: 150px"
+                                     class="panel panel-default talk-bubble tri-right left-top">
+                                    <div style="padding: 6px; padding-top: 22px; font-size: 14px;font-family: 'lato'"
+                                         class=" panel-body ng-binding">
+                                        Do you have any body concerns?
+                                        <br><br>
+                                        <form class="form-inline ua_form">
+                                            <button value="Large Busts"
+                                                    ng-style="(check_bc_active('Large Busts'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Large Busts
+                                            </button>
+                                            <button value="Small Busts"
+                                                    ng-style="(check_bc_active('Small Busts'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Small Busts
+                                            </button>
+                                            <button value="Wide Hips"
+                                                    ng-style="(check_bc_active('Wide Hips'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Wide Hips
+                                            </button>
+                                            <br>
+                                            <button value="Small Hips"
+                                                    ng-style="(check_bc_active('Small Hips'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Small Hips
+                                            </button>
+                                            <button value="Big Thighs"
+                                                    ng-style="(check_bc_active('Big Thighs'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Big Thighs
+                                            </button>
+                                            <button value="Narrow Shoulders"
+                                                    ng-style="(check_bc_active('Narrow Shoulders'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Narrow Shoulders
+                                            </button>
+                                            <br>
+                                            <button value="Broad Shoulders"
+                                                    ng-style="(check_bc_active('Broad Shoulders'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Broad Shoulders
+                                            </button>
+                                            <button value="Long Legs"
+                                                    ng-style="(check_bc_active('Long Legs'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Long Legs
+                                            </button>
+                                            <button value="Short Legs"
+                                                    ng-style="(check_bc_active('Short Legs'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Short Legs
+                                            </button>
+                                            <br>
+                                            <button value="Thin Legs"
+                                                    ng-style="(check_bc_active('Thin Legs'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Thin Legs
+                                            </button>
+                                            <button value="Small Torso"
+                                                    ng-style="(check_bc_active('Small Torso'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Small Torso
+                                            </button>
+                                            <button value="Long Torso"
+                                                    ng-style="(check_bc_active('Long Torso'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Long Torso
+                                            </button>
+                                            <br>
+                                            <button value="Tummy"
+                                                    ng-style="(check_bc_active('Tummy'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Tummy
+                                            </button>
+                                            <button value="Big Arms"
+                                                    ng-style="(check_bc_active('Big Arms'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                                    class="ua_form_button form-control"
+                                                    ng-click="set_bc_prop($event.target.value) ; ref = 1 ;">
+                                                Big Arms
+                                            </button>
+                                            <br>
+                                            <div class="bc_form_submit">
+                                                <button type="submit" style="display:inline-block"
+                                                        class="btn btn-primary ua_form_submit"
+                                                        ng-click="send_bc_prop()" style="font-weight: bold;">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                            <span style="display:block;text-align: center">Or No Body Concerns</span>
+                                            <div class="bc_form_submit">
+                                                <button type="submit" style="display:inline-block"
+                                                        class="btn btn-primary ua_form_submit"
+                                                        ng-click="send_bc_prop_nothing()" style="font-weight: bold;">
+                                                    Nothing
+                                                </button>                                              
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="show_bc_edit && !show_bc " style="margin-top: 10px"
+                         class="fading col-sm-12">
+                        <div class="row">
+                            <div class="col-xs-3">
+                            </div>
+                            <div style="animation-delay: 10s; padding-right: 2px"
+                                 class="col-xs-9">
+                                <div style="background-color:#5dcccd;  border: none;min-width: 150px;margin-right: 6%;"
+                                     class="panel panel-default  talk-bubble1 tri-left right-top">
+                                    <div style="padding: 5px; color:#fff; padding-top: 22px; font-size: 14px;font-family: 'lato'"
+                                         class=" panel-body ng-binding">
+                                        You have submitted the following body concerns:<br>
+                                        <div ng-repeat="bc in active_bc" style="color:#fff">
+                                            {{bc | capitalize | underscoreless}}<br>
+                                        </div>
+                                        <div class="bc_form_submit">
+                                            <button ng-click="edit_ua_and_bc()"
+                                                    style="display:inline-block;padding-left: 4%;"
+                                                    class="btn ua_form_edit">
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-repeat="user in users" class="fading col-sm-12 ng-scope">
+                        <div class="row" ng-if="user">
+                            <div class="col-xs-3"
+                                 ng-class="{'col-xs-push-9' : !(user.username == currentUser)}">
+                            </div>
+                            <div style="animation-delay: 10s;padding-top:10px;margin: 0px;padding-right: 2px "
+                                 class="col-xs-9"
+                                 ng-class="{'col-xs-pull-3' : !(user.username == currentUser)}">
+                                <div ng-class="{'talk-bubble tri-right left-top' : (user.username != currentUser),
+                                'talk-bubble1 tri-left right-top' : (user.username == currentUser)}"
+                                 class=" panel panel-default " style="background-color:rgba(255, 255, 255, 0.9);  border: none;width: auto;"
+                                     ng-style="(user.username == currentUser) && {'background':'#5DCCCD','color':'white','float':'right','margin-right':'6%','border-radius': '5px','padding-left':'2%'} ||
+                                      (user.username != currentUser) && {'border-radius': '5px','border-top-left-radius':'0px'} "
+                                     >
+                                    <div  style="padding: 5px; padding-right: 0px; white-space:pre-line;font-size: 14px;
+                                        padding-right:20px;font-family: 'lato';" class=" panel-body ng-binding"
+                                         ng-style="(user.username == currentUser) && {'color':'white'}">{{user.message}}<span
+                                            style="font-size: 8px;float: right;  padding-top: 13px;padding-left: 15px;">&nbsp&nbsp&nbsp{{user.date |date: 'HH:mm'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img ng-show=" showtype" style="margin-left: 1%;border-radius : 7px;padding-top:10px;"
+                         src="static/pics/typing4.gif"
+                         alt="typing..." height="60px"></img>
+                    <div ng-show="!showtype && inspiration_tiles[0]" class="options fading"
+                         style="margin-left: 5%;margin-top: -3px;width: 69.5%;">
+                        <br>
+                        <ul ng-repeat="x in inspiration_tiles"
+                            style="font-size: 14px;height: auto;font-family: 'lato';">
+
+                            <button style="font-size: 14px;white-space: normal;min-width:190px;border:1px solid #5DCCCD;  font-family: 'lato';color: black;"
+                                    type="button"
+                                    class="btn btn-primary " ng-click="postDropdowns(x.key) ;">{{x.value | capitalize}}
+                            </button>
+                        </ul>
+                    </div>
+                    <div ng-show="!showtype && multi_select[0]" class="options fading"
+                         style="margin-left: 5%;margin-top: 2px;width: 69.5%;">
+                        <br>
+                        <ul ng-repeat="option in multi_select"
+                            style="font-size: 14px;height: auto;font-family: 'lato';text-align: center">
+                            <button ng-style="isChecked($index) && {'background-color':'#5dcccd','color':'#fff'}"
+                                    ng-click="check($index)"
+                                    class="btn multi_select_btn" value="{{option.key}}" id="multi_{{$index}}">
+                                {{option.value | capitalize}}
+                            </button>
+                        </ul>
+                        <span style="padding-left:40px">
+                            <button style="margin:10px 0px 10px 20px;font-size: 14px;font-weight: bold; white-space: normal;min-width:150px;border:1px solid #5DCCCD;background-color:#5dcccd; font-family: 'lato';color: #fff;"
+                                    class="btn btn-primary" ng-click="postMultiSelect()">
+                                Submit Selected
+                            </button>
+                        </span>
+                    </div>
+                    <div id="bottom"></div>
+                </div>
+
+                <div ng-style="(boolChangeClass)?{'position':'absolute',}:{'position':'fixed',}"
+                     class="input-group row ng-scope " style=" position: fixed;bottom: 5px;background:none; "
+                     ng-click="dimbrowse()">
+                    <ul class="list-group autocomplete_list" ng-show="show_autocomplete_list"
+                        style=" margin-left: 14px;">
+                        <li class="list-group-item" value="{{chat_suggestions_heading}}" style="color:#5dcccd">
+                            Example: {{chat_suggestions_heading}}
+                        </li>
+                        <a ng-if="chat_suggestions_options[0]!=''"
+                           ng-click="set_input_value(chat_suggestions_options[0])">
+                            <li class="list-group-item" value="{{chat_suggestions_options[0]}}">
+                                {{chat_suggestions_options[0]}}
+                            </li>
+                        </a>
+                        <a ng-if="chat_suggestions_options[1]!=''"
+                           ng-click="set_input_value(chat_suggestions_options[1])">
+                            <li class="list-group-item" value="{{chat_suggestions_options[1]}}">
+                                {{chat_suggestions_options[1]}}
+                            </li>
+                        </a>
+                        <a ng-if="chat_suggestions_options[2]!=''"
+                           ng-click="set_input_value(chat_suggestions_options[2])">
+                            <li class="list-group-item" value="{{chat_suggestions_options[2]}}">
+                                {{chat_suggestions_options[2]}}
+                            </li>
+                        </a>
+                        <a ng-if="chat_suggestions_options[3]!=''"
+                           ng-click="set_input_value(chat_suggestions_options[3])">
+                            <li class="list-group-item" value="{{chat_suggestions_options[3]}}">
+                                {{chat_suggestions_options[3]}}
+                            </li>
+                        </a>
+                        <li style="color:#5dcccd" class="list-group-item" value="{{chat_suggestions_understood}}"
+                            ng-if="chat_suggestions_understood!=''">
+                            I understood
+                            : {{chat_suggestions_understood}}
+                            <span class="pull-right">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </span>
+                        </li>
+                        <li style="color:#5dcccd" class="list-group-item" value="{{chat_suggestions_understood}}"
+                            ng-if="chat_suggestions_understood==''">
+                            I couldn't understand
+                        </li>
+                    </ul>
+
+
+                    <form ng:submit="postMesg(message)" style="padding-top: 2%;margin:0px;margin-left: 2px; ">
+                        <div class="input-group"
+                             style="width: 26vw;padding-left: 4%; border: none; padding-bottom: 2%;padding-top: 0px;"
+                             id="inp_field">
+                                <span class="input-group-addon"
+                                      style="padding: 0px;margin: 0px;width: auto;border: none;background-color: #fff;">
+                                            <button ng-click="show_overlay = 1" data-toggle="offcanvas"
+                                                    data-target="#off-canvas"
+                                                    style="padding: 0px;border: none;margin: 0px;background-color: white;margin-right: 0px;"
+                                                    type="button" id="offcanvas_toggle">
+                                                <span class="glyphicon glyphicon-user"></span>
+                                            </button>
+                                </span>
+                            <span class="input-group-addon"
+                                  style="background-color: #fff;border:none ;font-size: 24px;margin: 0px;padding:0px;color: #BFBFBF;text-align: center;vertical-align: center;">|</span>
+                                <!-- for refresh list module add ng-focus="ref=1;" ng-blur="ref=0;" to the input below -->
+                              
+                            <input ng-change="updateSuggestions(message)"  ng-blur="hide_autocomplete_list()"
+                                   style="bottom: 0px;padding: 0px;margin: 0px; z-index: 0;border:none;border-radius: none; "
+                                   id="data " type="text" ng-model="message"
+                                   class="form-control" placeholder="      Type your message here "
+                                   autocomplete="off" required>
+                            <span class="input-group-addon"
+                                  style="padding: 0px;margin: 0px;background-color: #fff;border:none;">
+                                <button class="btn-primary " id="datasend " type="button" class="form-control"
+                                        style="padding: 0px;border: none;margin: 0px;background-color: white;margin-right: 10px;"
+                                        ng-click="postMesg(message) "><img src="../static/pics/icons/send.png"></button>
+                                </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="force-overflow"></div>
+        </div>
+    </div>
+</div>
+
+<!--Modals for help text in forms-->
+<div id="skintone_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog helptext_modal">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header helptext_title">
+                <button type="button" id="close_skintone" class="close" data-dismiss="modal" ng-click="check_overlay()">
+                    &times;
+                </button>
+                <h3 class="modal-title">Skintone</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img ng-click='click_button_by_id("close_skintone","skintone_fair")'
+                             src="static/pics/skintone/fair.png" ng-if="offcanvas_show_edit == 0">
+                        <img ng-click='click_button_by_id_2("close_skintone","offcanvas_skintone_fair")'
+                             src="static/pics/skintone/fair.png" ng-if="offcanvas_show_edit == 1">
+                        <h4>Fair</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <img ng-click='click_button_by_id("close_skintone","skintone_dark")'
+                             src="static/pics/skintone/dusky.png" ng-if="offcanvas_show_edit == 0">
+                        <img ng-click='click_button_by_id_2("close_skintone","offcanvas_skintone_dark")'
+                             src="static/pics/skintone/dusky.png" ng-if="offcanvas_show_edit == 1">
+                        <h4>Dark</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <img ng-click='click_button_by_id("close_skintone","skintone_wheatish")'
+                             src="static/pics/skintone/wheatish.png" ng-if="offcanvas_show_edit == 0">
+                        <img ng-click='click_button_by_id_2("close_skintone","offcanvas_skintone_wheatish")'
+                             src="static/pics/skintone/wheatish.png" ng-if="offcanvas_show_edit == 1">
+                        <h4>Wheatish</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="bodyshape_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog helptext_modal">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header helptext_title">
+                <button type="button" id="close_bodyshape" class="close" data-dismiss="modal"
+                        ng-click="check_overlay()">&times;
+                </button>
+                <h3 class="modal-title">Bodyshape</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img height="200px" ng-click='click_button_by_id("close_bodyshape","bodyshape_rectangle")'
+                             src="static/pics/bodyshape/rectangle.jpg" ng-if="offcanvas_show_edit == 0">
+                        <img height="200px"
+                             ng-click='click_button_by_id_2("close_bodyshape","offcanvas_bodyshape_rectangle")'
+                             src="static/pics/bodyshape/rectangle.jpg" ng-if="offcanvas_show_edit == 1">
+                        <h4>Rectangle</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <img height="200px" ng-click='click_button_by_id("close_bodyshape","bodyshape_pear")'
+                             src="static/pics/bodyshape/pear.jpg" ng-if="offcanvas_show_edit == 0">
+                        <img height="200px"
+                             ng-click='click_button_by_id_2("close_bodyshape","offcanvas_bodyshape_pear")'
+                             src="static/pics/bodyshape/pear.jpg" ng-if="offcanvas_show_edit == 1">
+                        <h4>Pear</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <img height="200px" ng-click='click_button_by_id("close_bodyshape","bodyshape_apple")'
+                             src="static/pics/bodyshape/apple.jpg" ng-if="offcanvas_show_edit == 0">
+                        <img height="200px"
+                             ng-click='click_button_by_id_2("close_bodyshape","offcanvas_bodyshape_apple")'
+                             src="static/pics/bodyshape/apple.jpg" ng-if="offcanvas_show_edit == 1">
+                        <h4>Apple</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <img height="200px" ng-click='click_button_by_id("close_bodyshape","bodyshape_hourglass")'
+                             src="static/pics/bodyshape/hourglass.jpg" ng-if="offcanvas_show_edit == 0">
+                        <img height="200px"
+                             ng-click='click_button_by_id_2("close_bodyshape","offcanvas_bodyshape_hourglass")'
+                             src="static/pics/bodyshape/hourglass.jpg" ng-if="offcanvas_show_edit == 1">
+                        <h4>Hourglass</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div id="off-canvas" class="offcanvas">
+    <div id="offcanvas-content" ng-show="offcanvas_show_profile">
+        <div class="row offcanvas-row">
+            <span class="pull-right">
+                <button ng-click="offcanvas_show_profile = 0; offcanvas_show_edit = 1" class="offcanvas-edit">
+                    <span style="margin-top: 3px">Edit</span>
+                    <img src="../static/pics/icons/edit.png"
+                         style="height: 26px;float: left;border: none;border-radius: 4px; margin-right: 5px;"
+                         class="icon_edit">
+                </button>
+            </span>
+        </div>
+        <div class="row offcanvas-row" style="text-align: center; margin: 40px 0px">
+            <img src="../static/pics/icons/dots.png">
+        </div>
+        <div class="row offcanvas-header">
+            <span class="offcanvas-heading">BASED ON WHAT YOU HAVE GIVEN...</span>
+        </div>
+        <div class="row offcanvas-row overflow-scroll">
+            <ul class="list-group offcanvas-ul">
+                <li class="list-group-item offcanvas-li">
+                    <label for="height" class="offcanvas-label">Height:</label>
+                    <span id="height" class="offcanvas-ua-value">
+                        <span ng-if="ua_height!=''">
+                            {{ua_height|capitalize}}
+                        </span>
+                        <span ng-if="ua_height===''||ua_height===undefined">
+                            Not provided
+                        </span>
+                    </span>
+                </li>
+                <li class="list-group-item offcanvas-li">
+                    <label for="bodyshape" class="offcanvas-label">Bodyshape:</label>
+                    <span id="bodyshape" class="offcanvas-ua-value">
+                        <span ng-if="ua_bodyshape!=''">
+                            {{ua_bodyshape|capitalize}}
+                        </span>
+                        <span ng-if="ua_bodyshape===''||ua_bodyshape===undefined">
+                            Not provided
+                        </span>
+                    </span>
+                </li>
+                <li class="list-group-item offcanvas-li">
+                    <label for="age" class="offcanvas-label">Age:</label>
+                    <span id="age" class="offcanvas-ua-value">
+                        <span ng-if="ua_age!=''">
+                            {{ua_age|capitalize}}
+                        </span>
+                        <span ng-if="ua_age===''||ua_age===undefined">
+                            Not provided
+                        </span>
+                    </span>
+                </li>
+                <li class="list-group-item offcanvas-li">
+                    <label for="skintone" class="offcanvas-label">Skintone:</label>
+                    <span id="skintone" class="offcanvas-ua-value">
+                        <span ng-if="ua_skintone!=''">
+                            {{ua_skintone|capitalize}}
+                        </span>
+                        <span ng-if="ua_skintone===''||ua_skintone===undefined">
+                            Not provided
+                        </span>
+                    </span>
+                </li>
+                <li class="list-group-item offcanvas-li">
+                    <label for="body-concerns" class="offcanvas-label">Body Concerns:</label>
+                    <span id="body-concerns" class="offcanvas-ua-value">
+                        <span ng-repeat="bc in active_bc">
+                            <span ng-if="!$last">
+                                {{bc | capitalize}},
+                            </span>
+                            <span ng-if="$last">
+                                {{bc | capitalize}}
+                            </span>
+                        </span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="row offcanvas-row offcanvas-bc-container">
+
+        </div>
+    </div>
+    <div id="offcanvas-content" ng-show="offcanvas_show_edit">
+        <div class="row offcanvas-row">
+            <span>
+                <button style="padding-left:5px; margin-left:10px" ng-click="reset_ua_and_bc();"
+                        class="offcanvas-edit">
+                    Clear all
+                </button>
+            </span>
+            <span class="pull-right">
+                <button style="padding-left:5px" ng-click="offcanvas_show_profile = 1; offcanvas_show_edit = 0"
+                        class="offcanvas-edit">
+                    Back
+                </button>
+            </span>
+        </div>
+        <div class="row offcanvas-row" style="text-align: center; margin: 30px 0px">
+            <img src="../static/pics/icons/dots.png">
+        </div>
+        <div class="row offcanvas-header" style="padding-bottom: 0px">
+            <span class="offcanvas-heading">Edit Profile</span>
+        </div>
+        <div class="row offcanvas-row">
+            <div id="offcanvas-ua-form">
+                <div class="row offcanvas-ua-form">
+                    <form class="form-inline ua_form">
+                        <br><span class="offcanvas-form-label">Select Age</span><br>
+                        <button ng-style="(active_age=='18-27')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="age_18-27"
+                                ng-click="set_ua_prop($event.target.value)">18-27
+                        </button>
+                        <button ng-style="(active_age=='28-38')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="age_28-38"
+                                ng-click="set_ua_prop($event.target.value)">28-38
+                        </button>
+                        <button ng-style="(active_age=='39+')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="age_39+"
+                                ng-click="set_ua_prop($event.target.value)">39+
+                        </button>
+                        <br><br><span class="offcanvas-form-label">Select Height</span><br>
+                        <button ng-style="(active_height=='short')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="height_short"
+                                ng-click="set_ua_prop($event.target.value)">Short
+                        </button>
+                        <button ng-style="(active_height=='average')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="height_average"
+                                ng-click="set_ua_prop($event.target.value)">Average
+                        </button>
+                        <button ng-style="(active_height=='tall')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="height_tall"
+                                ng-click="set_ua_prop($event.target.value)">Tall
+                        </button>
+                        <br><br><span class="offcanvas-form-label">Select Skintone</span>
+                        <!--Modal box trigger-->
+                        <a class="helptext_trigger pull-right" data-toggle="modal"
+                           data-target="#skintone_modal"><span
+                                class="glyphicon glyphicon-question-sign"></span></a>
+                        <br>
+                        <button ng-style="(active_skintone=='fair')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="skintone_fair"
+                                ng-click="set_ua_prop($event.target.value)" id="offcanvas_skintone_fair">
+                            Fair
+                        </button>
+                        <button ng-style="(active_skintone=='dark')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="skintone_dark"
+                                ng-click="set_ua_prop($event.target.value)" id="offcanvas_skintone_dark">
+                            Dark
+                        </button>
+                        <button ng-style="(active_skintone=='wheatish')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="skintone_wheatish"
+                                ng-click="set_ua_prop($event.target.value)" id="offcanvas_skintone_wheatish">Wheatish
+                        </button>
+                        <br><br><span class="offcanvas-form-label">Select Bodyshape</span>
+                        <!--Modal box trigger-->
+                        <a class="helptext_trigger pull-right" data-toggle="modal"
+                           data-target="#bodyshape_modal"><span
+                                class="glyphicon glyphicon-question-sign"></span></a>
+                        <br>
+                        <button ng-style="(active_bodyshape=='rectangle')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="bodyshape_rectangle"
+                                ng-click="set_ua_prop($event.target.value)" id="offcanvas_bodyshape_rectangle">Rectangle
+                        </button>
+                        <button ng-style="(active_bodyshape=='pear')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="bodyshape_pear"
+                                ng-click="set_ua_prop($event.target.value)" id="offcanvas_bodyshape_pear">
+                            Pear
+                        </button>
+                        <button ng-style="(active_bodyshape=='apple')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="bodyshape_apple"
+                                ng-click="set_ua_prop($event.target.value)" id="offcanvas_bodyshape_apple">Apple
+                        </button>
+                        <button ng-style="(active_bodyshape=='hourglass')&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control" value="bodyshape_hourglass"
+                                ng-click="set_ua_prop($event.target.value)" id="offcanvas_bodyshape_hourglass">Hourglass
+                        </button>
+                        <br><br>
+                        <span class="offcanvas-form-label">Body Concerns</span>
+                        <button value="Large Busts"
+                                ng-style="(check_bc_active('Large Busts'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Large Busts
+                        </button>
+                        <button value="Small Busts"
+                                ng-style="(check_bc_active('Small Busts'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Small Busts
+                        </button>
+                        <button value="Wide Hips"
+                                ng-style="(check_bc_active('Wide Hips'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Wide Hips
+                        </button>
+                        <button value="Tummy"
+                                ng-style="(check_bc_active('Tummy'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Tummy
+                        </button>
+                        <button value="Small Hips"
+                                ng-style="(check_bc_active('Small Hips'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Small Hips
+                        </button>
+                        <button value="Big Thighs"
+                                ng-style="(check_bc_active('Big Thighs'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Big Thighs
+                        </button>
+                        <button value="Narrow Shoulders"
+                                ng-style="(check_bc_active('Narrow Shoulders'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Narrow Shoulders
+                        </button>
+                        <button value="Broad Shoulders"
+                                ng-style="(check_bc_active('Broad Shoulders'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Broad Shoulders
+                        </button>
+                        <button value="Long Legs"
+                                ng-style="(check_bc_active('Long Legs'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Long Legs
+                        </button>
+                        <button value="Short Legs"
+                                ng-style="(check_bc_active('Short Legs'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Short Legs
+                        </button>
+                        <button value="Thin Legs"
+                                ng-style="(check_bc_active('Thin Legs'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Thin Legs
+                        </button>
+                        <button value="Small Torso"
+                                ng-style="(check_bc_active('Small Torso'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Small Torso
+                        </button>
+                        <button value="Long Torso"
+                                ng-style="(check_bc_active('Long Torso'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Long Torso
+                        </button>
+                        <button value="Big Arms"
+                                ng-style="(check_bc_active('Big Arms'))&&{'background-color':'#5dcccd','color':'#fff'}"
+                                class="ua_form_button form-control"
+                                ng-click="set_bc_prop($event.target.value)">
+                            Big Arms
+                        </button>
+                        <br>
+                        <div class="bc_form_submit">
+                            <button type="submit" style="display:inline-block"
+                                    class="btn btn-primary ua_form_submit"
+                                    ng-click="offcanvas_send_ua_and_bc()">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

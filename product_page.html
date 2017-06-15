@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="WeddingDressesForWomen" ng-controller="WeddingDressesForWomen"
+      class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="WeddingDressesForWomen" ng-controller="WeddingDressesForWomen"
+      class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="WeddingDressesForWomen" ng-controller="WeddingDressesForWomen"
+      class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="ProductPage" ng-controller="ProductPage" class="no-js"
+      xmlns="https://www.w3.org/1999/html"> <!--<![endif]-->
+<head>
+    <meta name="fragment" content="!">
+    <meta charset="utf-8">
+    <meta name="verify-admitad" content="ed499e6bac"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="wot-verification" content="591de88d2ae5d58564c7"/>
+    <title></title>
+    <link rel="icon" href="/static/pics/favicon.png">
+    <meta name="description"
+          content="Selekt is a chat based interactive assistant that helps in finding products suiting your needs. Based on your requirements, Selekt recommends a list of products with the features, specification, application etc.">
+    <meta itemprop="description" content="Application wide description for Schema.org (Google+ uses this)">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,200,300' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="{{canonical_url}}" type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" type='text/css'>
+    <link rel="stylesheet" href="../static/bower_components/html5-boilerplate/dist/css/normalize.css" type='text/css'>
+    <link rel="stylesheet" href="../static/bower_components/html5-boilerplate/dist/css/main.css" type='text/css'>
+    <link rel="stylesheet" href="../static/bower_components/angular-typewrite/dist/angular-typewrite.css" type='text/css'/>
+    <link rel="stylesheet" href="../../static/css/all_custom_css.css" type='text/css'>
+    <link rel="stylesheet" href="../../static/css/all_style_css.css" type='text/css'>
+    <link rel="stylesheet" href="../../static/css/all_third_party_css.css" type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-92766347-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <base href="/" >
+</head>
+<body cz-shortcut-listen="true" style="background: white; overflow-x: hidden">
+<div ng-show="!show_page">
+    <div class="loader" style="position: fixed; left: 50%; top: 50%; ">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<div ng-show="show_overlay" class="offcanvas-overlay"
+     ng-click="show_overlay = 0; offcanvas_show_profile = 1; offcanvas_show_edit = 0" ng-cloak>
+</div>
+
+<div id="main_page" ng-show="show_page" style="background-image: none;background-color: #fff;background:#fff;border:none;" >
+    <nav_header></nav_header>
+
+    <div class="container" id="cont" style="background-color: #fff;background:none;background-image: none;" >
+        <div ng-show="shop_by_brands_dir" class="row" style="padding-top: 62px;">
+            <shop-by-brands></shop-by-brands>
+        </div>
+
+        <div ng-show="!shop_by_brands_dir" class="row "  style="padding-top: 62px;padding-right: 0px;padding-left: 0px; margin-top : 50px ;" >
+            <div class="col-lg-1  col-md-1 col-sm-1" >
+            </div>
+
+            <div  class="col-lg-10  col-md-10 col-sm-10 "  id="div1" >
+                <!--<inspirations ng-show="inspirations_dir"></inspirations>-->
+                <product-list-content ng-show="product_list_content_dir"></product-list-content>
+                <product-page-content ng-show="product_page_content_dir"></product-page-content>
+                
+                <hr style="margin-bottom: 40px; border: 2px solid #eee">
+               
+                <!-- this section is not required in product page
+                <div id="categories" style="">
+                    <category-page></category-page>
+                </div>
+                -->
+
+            </div>
+
+            <div  class="col-lg-1  col-md-1 col-sm-1 " ></div>
+
+        </div>
+        <div class="row" style="position: absolute;padding: 0px;margin: 0px;" class="row">
+            <footer-div></footer-div>
+            <div id="gotoTop" ng-click="gototop()" style="background:none;border: none;box-shadow: none;">
+                <img src="../static/pics/arrow_up.png" style="font-family: 'Lato';padding-bottom: 0; margin-bottom: 0; line-height: 1;background: white;border-radius: 100%; " class="img-responsive">
+
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<style type="text/css">@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);</style>
+
+<script src="static/bower_components/angular/angular.js"></script>
+<script src="static/bower_components/angular-route/angular-route.js"></script>
+<script src="static/js/angular-ismobile.min.js"></script>
+<script src="static/bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="static/js/angular-searchAndSelect.js"></script>
+<script src="static/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="static/bower_components/socket.io/socket.io.js"></script>
+<script src="static/product-app-services/app-services.js"></script>
+<script src="static/app-services/app.module.js"></script>
+<script src="static/js/angular-seo.js"></script>
+<script src="static/bower_components/angular-typewrite/dist/angular-typewrite.js"></script>
+<script src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="static/bower_components/bootbox/bootbox.js"></script>
+<script src="static/bower_components/ngBootbox/dist/ngBootbox.min.js"></script>
+<script src="static/bower_components/ngStorage/ngStorage.min.js"></script>
+<script src="static/js/jasny-bootstrap.min.js"></script>
+<script src="static/js/offcanvas.js"></script>
+<script src="static/bower_components/client.min.js"></script>
+<script src="static/publish/product/product-chat.js"></script>
+
+</body>
+</html>

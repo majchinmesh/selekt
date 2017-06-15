@@ -1,0 +1,251 @@
+<div class="container" style=" background: white;border:none;background-color: white" ng-cloak>
+
+    <div class="row" style="padding-left: 1.7%;">
+        <br>
+        <div class="row" style="border:none;padding: 0px;margin: 0px;"  ng-if="productline_name!=undefined">
+            <a href="{{website}}" style="text-decoration: none"> <span
+                    style="font-weight: lighter;color: black;font-size: 12px;padding: 1px;cursor: pointer;color: #b2b2b2;"> Home /</span>
+            </a>
+            <a href="{{website}}/find/women" style="text-decoration: none"> <span
+                    style="font-weight: lighter;color: black;font-size: 12px;padding: 1px;cursor: pointer;color: #b2b2b2;"> Women /</span>
+            </a>
+            <a href="#" style="text-decoration: none;color: #b2b2b2;"> <span
+                    style="font-weight: lighter;font-size: 12px;padding: 1px;cursor: not-allowed"> Western Wear /</span>
+            </a>
+            <a href="#" style="text-decoration: none;color: #8c8c8c;"> <span
+                    style="font-weight: lighter;font-size: 12px;padding: 1px;cursor: text">{{headings | capitalize | removeunderscore}}</span>
+            </a>
+
+            <br><br>
+        </div>
+        <div class="row" style="border:none;padding: 0px;margin: 0px;">
+            <!--h1 style="font-size: 18px; font-weight:600; margin: 0;display: inline;"
+                ng-show="(user_selected_categories.occasion=='') && (user_selected_categories.age == '') && (user_selected_categories.body_shape == '')
+            && (user_selected_categories.height == '') &&  (user_selected_categories.skin_color == '')"-->
+            <h1 style="font-size: 18px; font-weight:600; margin: 0;display: inline;"
+                ng-show="(user_selected_categories.occasion=='') && (user_selected_categories.age == '') && (user_selected_categories.body_shape == '')
+            && (user_selected_categories.height == '') &&  (user_selected_categories.skin_color == '')">
+                {{productline_name | capitalize}}
+                <span style="font-size: 15px;color:#8c8c8c">({{total_items}}&nbsp products)  </span>
+            </h1>
+        </div>
+        <!--Showing added benefits and letting user add more benefits-->
+        <div style="font-size: 16px; font-weight:600; margin: 0 ;display: inline">
+            
+            <div class="row selected_benefits_row">
+                <div class="col-lg-6" style="margin-left: 0px;padding-left: 0px;">
+                <span class="selected_benefits_heading">Selected Benefits</span>
+                </div>
+                <div class="col-lg-6" style=";padding: 0px;">
+                    <button ng-click="show_all_filters = 1;" class="btn_reset" style="float: right;padding-left: 0%;padding-right: 2.2%;padding-top: 7px;margin-top: 0px; height: 36px;color: #fff;background-color: #5DCCCD;font-size: 15px;display: inline"  id="datasend " type="button">FILTERS<img src="../pics/icons/filter.png" class="img-responsive" style="height: 36px; float: left; border-radius: 4px;margin-right: 5px;margin-top: -7px; " class="icon_reset"></button>
+                </div>
+                <!--button ng-click="show_all_benefits = 1" class="selected_benefits_add_more">
+                    <img src="pics/icons/add.png" class="selected_benefits_add_more_icon">
+                    Add more
+                </button-->
+            </div>
+            <div class="row selected_benefits_row">
+                <span ng-repeat="benefit in applied_benefits">
+                     <button ng-click="update_applied_benefits(benefit,0)" class="selected_benefits_button">
+                         {{benefit.display_name}}
+                         &nbsp;
+                         &times;
+                     </button>
+                </span>
+            </div>
+            </div-->
+            <!-- Added benefits and add more benefits end here-->
+
+            <h1 ng-if="productline_name!=undefined" style="font-size: 16px; font-weight:600; margin: 0;display: table">
+        
+        <span ng-if="(user_selected_categories.occasion!='')">
+        {{user_selected_categories.occasion | capitalize | removehiphen}}  {{productline_name | capitalize | removeunderscore}}
+            <span ng-if="(user_selected_categories.age!='') ||  (user_selected_categories.body_shape!='') ||
+                (user_selected_categories.skin_color!='') || (user_selected_categories.height!='')">
+                        for
+                        <span ng-if="user_selected_categories.age!='' "> {{user_selected_categories.age | removestarthiphen }} </span>
+                        <span ng-if="user_selected_categories.body_shape!='' "> {{user_selected_categories.body_shape | removehiphen}} </span>
+                        <span ng-if="user_selected_categories.height!='' "> {{user_selected_categories.height | removehiphen}} </span>
+                        <span ng-if="user_selected_categories.skin_color!='' "> {{user_selected_categories.skin_color | removehiphen}} </span> women
+            </span>
+            <span style="font-size: 15px;color:#8c8c8c">({{total_items}}&nbsp products)  </span>
+        </span>
+            <span ng-if="(user_selected_categories.occasion=='') && ((user_selected_categories.age!='') ||
+                    (user_selected_categories.body_shape!='') || (user_selected_categories.skin_color!='') ||
+                     (user_selected_categories.height!='')) ">
+             {{productline_name | capitalize | removeunderscore }} for
+                        <span ng-if="user_selected_categories.age!='' "> {{user_selected_categories.age | removestarthiphen}} </span>
+                        <span ng-if="user_selected_categories.body_shape!='' "> {{user_selected_categories.body_shape | removehiphen}} </span>
+                        <span ng-if="user_selected_categories.height!='' "> {{user_selected_categories.height | removehiphen}} </span>
+                        <span ng-if="user_selected_categories.skin_color!='' "> {{user_selected_categories.skin_color | removehiphen}} </span> women
+            <span style="font-size: 15px;color:#8c8c8c">({{total_items}}&nbsp products)  </span>
+        </span>
+
+            </h1>
+            <hr>
+        </div>
+        <div ng-show="textTag">
+
+            <div ng-if="!show_content"
+                 style="margin-top:-20px; display: table; font-size: 15px;    width: 85%;padding-left: 1.7%;  text-align: justify; ">
+
+                <div class="row paraText" style="border:none;" ng-repeat="sentence in sentences.slice(0,1)"
+                     ng-show="content_type">
+                    <br>
+                    <h4 style="font-size: 15px">{{sentence.header.toString().split("_").join(" ")}}
+                    </h4>
+                    <h5 style="font-size: 12px">
+                        {{sentence.sentence.toString().split("_").join(" ")}}<span
+                            ng-show="$first && (sentences.length>1) " ng-click="showMore()"
+                            style="cursor: pointer;color: #0090c0;font-size: 12px;margin-left:15px"> {{show_more_less}}</span>
+                    </h5>
+                    <br>
+                </div>
+                <div class="row paraText" style="border:none;" ng-show="_show_more && content_type" class="paraText"
+                     ng-repeat="sentence in sentences.slice(1,10)">
+
+                    <h4 style="font-size: 15px">{{sentence.header.toString().split("_").join(" ")}}
+                    </h4>
+                    <h5 style="font-size: 12px">
+                        {{sentence.sentence.toString().split("_").join(" ")}}
+                    </h5>
+
+                </div>
+                <div class="row paraText" style="border:none;" ng-show="!content_type" style="font-size: 15px"
+                     ng-repeat="(key, attribute) in tabular"
+                     ng-if="$index < 4">
+                    {{key.split("_").join(" ")}} :<br>
+                    <ul class="paraText" ng-repeat="value in attribute" ng-if="$index < 4">
+                        <li> {{value}}</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+    <img ng-show="!products_list[0] && !showload && !total_items" src="pics/no_products_found.png" alt="loading..."
+         style="margin-left: 18%;margin-top:0px;width: 665px;height: 250px;margin-bottom: 130px;" class="img-responsive">
+        <div  ng-show="showload" class="row  col-lg-12" style="width: 65vw;height: 67vh;">
+        <div style="width: 70px;height: 70px;margin-top: 12%;margin-left: 48%;">
+                        <div ng-show="showload && !ref" class="loader">
+                          <div ></div>  <div ></div>  <div ></div> 
+                  </div></div>
+        </div>
+        <div ng-show="!showload" style="margin-top:-20px;border:3px #ff44ff; padding-left:0px" class="container">
+            <div class="row" style="border:none;padding-left:1.6%">
+                <div ng-if="!add_link" id="dialogs"
+                     ng-click="!add_link && setProductPage(x)"
+                     ng-bootbox-custom-dialog ng-bootbox-custom-dialog-template="/template/product_page.html"
+                     ng-repeat=" x in products_list"
+                     style="cursor: pointer;display: inline-flex;margin:0px;padding:4px;padding-bottom: 18px;"
+                     class="load_images col-lg-6 col-md-6 col-sm-12 col-xl-3 " >
+                    <div style="display: inline-flex;border:none;">
+                        <div style="background: url('pics/image-loader.gif');background-repeat: no-repeat;margin:0px;padding:0px;background-position: center;">
+                            <a ng-href="{{add_link && x.landingPageUrl}}">
+                                <img src="{{x.style_image.search.imageURL}}" height="310px" width="220px">
+                            </a>
+                        </div>
+                        <div style="">
+                            <br>
+                            <span style="font-weight:bold ;margin-left: 5px;text-overflow:ellipsis;">
+                        &nbsp&nbsp{{x.product_filter.brand.toUpperCase().substr(0, 16)}}
+                        <span ng-show="x.product_filter.brand.length > 20">...</span>
+                    </span>
+                            <br>
+                            <span style="font-weight: 400;font-size: 13px;">
+                        &nbsp&nbsp&nbsp&nbspRs.&nbsp{{x.product_filter.discount_price}}&nbsp
+                    </span>
+                            <strike style="font-weight: 400;font-size: 13px;color: gray"
+                                    ng-hide="x.product_filter.discount_percent == 0">Rs.&nbsp{{x.product_filter.price}}</strike>
+                            <span style="font-weight: 400;font-size: 13px;color: #0090c0"
+                                  ng-hide="x.product_filter.discount_percent == 0">&nbsp&nbsp{{x.product_filter.discount_percent}}% Off </span>
+                            <br> <span style="color: gray;font-size: 14px;font-weight:400 ">&nbsp&nbsp&nbsp&nbsp{{x.product_filter.website.toUpperCase()}}</span> 
+                            <br><br>
+                            <p ng-if="x.benefit_percentage != null" style="font-size: 14px;margin-left: 13px;">By comparison you asked for</p>
+                            <div class="benefit_div" style="height: 130px;">
+                                <button ng-repeat="x in x.benefits" class="benefits_tags">{{x}}</button>
+                            </div>
+                            <div ng-if="x.benefit_percentage != null" style="margin-left:88px;">
+                                <div class="benefit_percentage"
+                                     ng-if="x.benefit_percentage >= 0 && x.benefit_percentage < 33"
+                                     style="background-color: #ff3928;padding-left: 10px;padding-right: 10px;">
+                                    LOW&nbsp;MATCH
+                                </div>
+                                <div class="benefit_percentage"
+                                     ng-if="x.benefit_percentage >= 33 && x.benefit_percentage < 60"
+                                     style="background-color: #eebf04;padding-left: 10px;padding-right: 10px;">
+                                    MEDIUM&nbsp;MATCH
+                                </div>
+                                <div class="benefit_percentage"
+                                     ng-if="x.benefit_percentage >= 60 && x.benefit_percentage <= 100"
+                                     style="background-color: green;padding-left: 10px;padding-right: 10px;">
+                                    HIGH&nbsp;MATCH
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="add_description" style="padding: 10px;text-align: justify;">
+                        {{x.product_filter.product_desription}}
+                    </div>
+
+                </div>
+            </div>
+            <!--For Products with Direct Link onClick-->
+            <div ng-if="add_link" id="dialogs" class="load_images"
+                 style="cursor: pointer;display: inline-block;width: 420px;margin:0;padding:5px"
+                 ng-click="!add_link && setProductPage(x)"
+                 ng-bootbox-custom-dialog-template="/template/product_page.html" ng-repeat=" x in products_list"
+                 style="cursor: pointer;display: inline-flex">
+                <div style="display: inline-flex">
+                    <div style="background: url('pics/image-loader.gif');background-size: 25px 25px;background-repeat: no-repeat;background-position: center;">
+                        <a ng-href="{{add_link && x.landingPageUrl}}"><img src="{{x.style_image.search.imageURL}}"
+                                                                           height="310px" width="220px"></a>
+                    </div>
+                    <div style="min-width: 200px">
+                        <br>
+                        <span style="font-weight:bold ;margin-left: 5px;text-overflow:ellipsis;">&nbsp&nbsp{{x.product_filter.brand.toUpperCase().substr(0, 16)}}
+													<span ng-show="x.product_filter.brand.length > 20">...</span>
+													</span>
+                        <br> <span style="font-weight: 400;font-size: 11px;">&nbsp&nbsp&nbsp&nbspRs.&nbsp{{x.product_filter.discount_price}}&nbsp</span>
+                        <strike style="font-weight: 400;font-size: 11px;color: gray"
+                                ng-hide="x.product_filter.discount_percent == 0">Rs.&nbsp{{x.product_filter.price}}</strike>
+                        <span style="font-weight: 400;font-size: 13px;color: #0090c0"
+                              ng-hide="x.product_filter.discount_percent == 0">&nbsp&nbsp{{x.product_filter.discount_percent}}% Off </span>
+                        <br> <span style="color: gray;font-size: 14px;font-weight:400 ">&nbsp&nbsp&nbsp&nbsp{{x.product_filter.website.toUpperCase()}}</span>
+                        <div class="benefit_div" style="min-height: 202px;">
+                            <button ng-repeat="x in x.benefits" class="benefits_tags">{{x}}</button>
+                        </div>
+                        <div ng-if="x.benefit_percentage != null" style="margin-left:88px;">
+                            <div class="benefit_percentage"
+                                 ng-if="x.benefit_percentage >= 0 && x.benefit_percentage < 33"
+                                 style="background-color: #ff3928;padding-left: 10px;padding-right: 10px;">
+                                LOW&nbsp;MATCH
+                            </div>
+                            <div class="benefit_percentage"
+                                 ng-if="x.benefit_percentage >= 33 && x.benefit_percentage < 60"
+                                 style="background-color: #eebf04;padding-left: 10px;padding-right: 10px;">
+                                MEDIUM&nbsp;MATCH
+                            </div>
+                            <div class="benefit_percentage"
+                                 ng-if="x.benefit_percentage >= 60 && x.benefit_percentage <= 100"
+                                 style="background-color: green;padding-left: 10px;padding-right: 10px;">
+                                HIGH&nbsp;MATCH
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="add_description" style="padding: 10px;text-align: justify;">
+                    {{x.product_filter.product_desription}}
+                </div>
+
+            </div>
+            <button id="show_more_products_btn" ng-show="remining" style="margin: 50px 0px 50px 40%"
+                    ng-click="showMoreProducts()" class="btn"> &nbsp&nbsp&nbsp&nbsp Show More
+                <span>({{remining}})</span>
+                &nbsp&nbsp&nbsp&nbsp
+            </button>
+        </div>
+    </div>
+</div>
+

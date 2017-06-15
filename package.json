@@ -12,7 +12,9 @@
     "connect": "^3.5.1",
     "express-device": "^0.4.2",
     "express-htaccess-middleware": "^0.1.0",
-    "get": "^1.4.0"
+    "get": "^1.4.0",
+    "phantomjs": "^2.1.7",
+    "prerender-node": "^2.7.1"
   },
   "devDependencies": {},
   "scripts": {

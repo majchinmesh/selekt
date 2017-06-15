@@ -1,0 +1,57 @@
+
+<div> 
+  <div style="display: inline-flex;width: 90%;padding-left: 10%">
+      <div style="width: 6%;" >
+        <div style="margin-top: 5px;border: 1px solid #eeeeee;padding-top: 0px;"  ng-repeat="x in product_page.style_image">
+            <img ng-mouseover="changeImage(x.imageURL)" ng-src="{{x.imageURL}}" alt="image" class="img-responsive">
+        </div>
+      </div>
+
+      <div style="margin-left: 2%;padding-top:5px;">
+        <img id="display_image" ng-src="{{product_page.image}}" alt="imageURL" width="420px" height="540px">
+      </div>
+
+      <div style="width: 40%;padding-left: 7%;">
+        <h4 style="color: black">
+          {{ product_page.product_filter.display_name.charAt(0).toUpperCase() + product_page.product_filter.display_name.slice(1).toLowerCase();  }}
+        </h4>
+        <br>
+        <h4>Rs.{{product_page.product_filter.discount_price}}&nbsp&nbsp&nbsp
+           <strike style="color: gray"
+                            ng-hide="product_page.product_filter.discount_percent == 0">Rs.&nbsp{{product_page.product_filter.price}}</strike>
+                    <span style="color: #0090c0"
+                          ng-hide="product_page.product_filter.discount_percent == 0">&nbsp&nbsp{{product_page.product_filter.discount_percent}}% Off</span>
+                    
+        </h4>
+         <hr style="    border-top: 1px solid #74757f;">
+        <h5 style="font-weight: bold">Available sizes</h5>
+        <br>
+        <h5> <span ng-style="(!product_page.product_filter.size_availability[$index]) && {'display':'none'}" ng-repeat="x in product_page.product_filter.all_size" style="font-weight: bold;padding-right:20px ">{{x}}</span> 
+        </h5>
+
+          <br><br>
+          <a href="{{product_page.landingPageUrl}}" target="_blank">
+          <button class="" style="background-color: #5DCCCD;color: white;border:none;box-shadow: none;height: 36px;border-radius: 5px;"> BUY ON {{product_page.product_filter.website.toUpperCase()}} </button>
+          </a>
+           <hr style="    border-top: 1px solid #74757f;">
+          <h5 style="font-weight: bold">Product description</h5>
+          <h6 style="line-height: 1.5em;font-size: 13px;">{{product_page.product_filter.product_desription}}</h6>
+
+      </div>
+  </div>
+
+  <div style="display: inline-flex;width: 90%;padding-left: 10%">
+
+        <div style="padding: 5% 0% 0% 30%;width: 60%">
+               <h5 style="font-weight: bold">Product Benefits </h5>
+               <hr style="    border-top: 1px solid #74757f;">
+               <table>
+                 <tr ng-repeat="x in product_page.product_benefits "> 
+                    <td style="text-transform: capitalize;white-space: nowrap;padding: 10px">{{x}}</td>
+                 </tr>
+               </table>
+        </div>
+
+        
+  </div>
+</div>

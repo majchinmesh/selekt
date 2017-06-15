@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="WeddingDressesForWomen" ng-controller="WeddingDressesForWomen"
+      class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="WeddingDressesForWomen" ng-controller="WeddingDressesForWomen"
+      class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="WeddingDressesForWomen" ng-controller="WeddingDressesForWomen"
+      class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="WeddingDressesForWomen" ng-controller="WeddingDressesForWomen" class="no-js"
+      xmlns="https://www.w3.org/1999/html"> <!--<![endif]-->
+<head>
+    <meta name="fragment" content="!">
+    <meta charset="utf-8">
+    <meta name="verify-admitad" content="ed499e6bac"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="wot-verification" content="591de88d2ae5d58564c7"/>
+    <title></title>
+    <link rel="icon" href="/static/pics/favicon.png">
+    <meta name="description"
+          content="Selekt is a chat based interactive assistant that helps in finding products suiting your needs. Based on your requirements, Selekt recommends a list of products with the features, specification, application etc.">
+    <meta itemprop="description" content="Application wide description for Schema.org (Google+ uses this)">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <link rel="canonical" href="{{canonical_url}}" type='text/css'>
+   
+    <base href="/" >
+</head>
+<body cz-shortcut-listen="true" style="background: white; overflow-x: hidden">
+<div ng-show="!show_page">
+    <div class="loader" style="position: fixed; left: 50%; top: 50%; ">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<div ng-show="show_overlay" class="offcanvas-overlay"
+     ng-click="show_overlay = 0; offcanvas_show_profile = 1; offcanvas_show_edit = 0" ng-cloak>
+</div>
+<div id="main_page" ng-show="show_page"
+     style="background-image: none;background-color: #fff;background:#fff;border:none;overflow-x:hidden" ng-cloak>
+    <nav_header></nav_header>
+
+    <div class="container" id="cont" style="background-color: #fff;background:none;background-image: none;overflow-x:hidden">
+        <div ng-show="shop_by_brands_dir" class="row" style="padding-top: 62px;overflow-x:hidden">
+            <shop-by-brands></shop-by-brands>
+        </div>
+        <div ng-show="!shop_by_brands_dir" class="row " style="padding-top: 62px;padding-right: 0px;padding-left: 0px;overflow-x:hidden">
+            <div id="div2" class="col-lg-3  col-md-4 col-sm-3" style="width: 28vw;margin: 0px;padding: 0px;">
+                <chat-bot></chat-bot>
+            </div>
+            <div class="col-lg-8  col-md-8 col-sm-9 " id="div1" style="width: 70vw;overflow-y: hidden;padding: 0px;margin: 0px;
+                overflow-x: hidden">
+
+                <!-- refresh list module -->
+                <div ng-show="ref"
+                     style="background: rgba(0, 0, 0, 0.85); width: 70vw;height: 100%;z-index: 9;position: absolute;">
+                    <!--total_items=temp_total_items;headings=temp_headings-->
+                    <button ng-click="ref = 0;products_list = temp_list;calc_rem ()" class="btn_reset"
+                            style="left:58%;top:50%; position: fixed; float: right;padding-left: 0%;padding-right: 1.2%;padding-top: 4px;height: 38px;color: #fff;background-color: #5DCCCD;border-radius:0px;font-size: 20px;"
+                            id="refresh" type="button">REFRESH NOW<img src="../static/pics/icons/resetbutton.png"
+                                                                       class="img-responsive"
+                                                                       style="height: 38px; float: left; margin-right: 5px;margin-top: -4px; "
+                                                                       class="icon_reset"></button>
+                </div>
+                <!-- refresh list module -->
+
+                <inspirations ng-show="inspirations_dir"></inspirations>
+                <product-list-content ng-show="product_list_content_dir"></product-list-content>
+                <hr style="margin-bottom: 40px; border: 2px solid #eee">
+                <div id="categories" style="">
+                    <category-page></category-page>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row" style="position: absolute;padding: 0px;margin: 0px;" class="row">
+            <footer-div></footer-div>
+            <div id="gotoTop" ng-click="gototop()" style="background:none;border: none;box-shadow: none;">
+                <img src="../static/pics/arrow_up.png"
+                     style="font-family: 'Lato';padding-bottom: 0; margin-bottom: 0; line-height: 1;background: white;border-radius: 100%; "
+                     class="img-responsive">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    <style type="text/css">@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);</style>
+<!-- <link rel="stylesheet" href="../static/css/max_bootstrap.css" type='text/css'>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" type='text/css'>
+    
+    <link rel="stylesheet" href="../static/bower_components/html5-boilerplate/dist/css/normalize.css" type='text/css'>
+    <link rel="stylesheet" href="../static/bower_components/html5-boilerplate/dist/css/main.css" type='text/css'>
+    <link rel="stylesheet" href="../static/bower_components/angular-typewrite/dist/angular-typewrite.css" type='text/css'/>
+    <link rel="stylesheet" href="../static/css/all_custom_css.css" type='text/css'>
+    <link rel="stylesheet" href="../static/css/all_style_css.css" type='text/css'>
+    <link rel="stylesheet" href="../static/css/all_third_party_css.css" type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-92766347-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+   <script type="text/javascript">
+        $(window).scroll(function ( event ) {
+            var d2 = document.getElementById("div2");
+            var inp_f = document.getElementById("inp_field");
+            var gt = document.getElementById("gotoTop");
+            var foot = document.getElementById("foot");
+            var ref = document.getElementById("refresh");
+            if ($(window).scrollTop() >= 1350) {
+                gt.style.display = 'block';
+            }
+            else {
+                gt.style.display = 'none';
+            }
+            var height = foot.offsetHeight;
+            if ($(window).scrollTop() + $(window).height() + height >= $(document).height()) {
+                var h = $(window).scrollTop() + $(window).height() + height - $(document).height();
+                d2.style.bottom = h - 2 + 'px';
+                inp_f.style.bottom = h - 2 + 'px';
+                //alert('doc'+$(document).height()+'window'+$(window).height());
+                ref.style.top = $(window).height() / 1.5 - h + 'px';
+            }
+            else {
+                d2.style.bottom = "0px";
+                inp_f.style.bottom = "0px"
+                ref.style.top = "50vh";
+            }
+            
+        });
+        $(document).ready(function(){
+            setTimeout(function(){
+                $('[data-toggle="popover"]').popover({
+                    trigger : 'hover'
+                });
+            },2000);
+        });
+    </script>
+    <script src="static/bower_components/angular/angular.js"></script>
+ <link href='https://fonts.googleapis.com/css?family=Lato:400,700,200,300' rel='stylesheet' type='text/css'>
+
+<script src="static/bower_components/angular-route/angular-route.js"></script>
+<script src="static/js/angular-ismobile.min.js"></script>
+<script src="static/bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="static/js/angular-searchAndSelect.js"></script>
+<script src="static/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="static/bower_components/socket.io/socket.io.js"></script>
+<script src="static/product-app-services/app-services.js"></script>
+<script src="static/app-services/app.module.js"></script>
+<script src="static/js/angular-seo.js"></script>
+
+<script src="static/bower_components/angular-typewrite/dist/angular-typewrite.js"></script>
+<script src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="static/bower_components/bootbox/bootbox.js"></script>
+<script src="static/bower_components/ngBootbox/dist/ngBootbox.min.js"></script>
+<script src="static/bower_components/ngStorage/ngStorage.min.js"></script>
+<script src="static/js/jasny-bootstrap.min.js"></script>
+<script src="static/js/offcanvas.js"></script>
+<script src="static/bower_components/client.min.js"></script>
+<script src="static/publish/wedding-dresses-for-women/product-chat.js"></script>
+
+</body>
+</html>

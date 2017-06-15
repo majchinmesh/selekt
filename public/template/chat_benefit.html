@@ -1,0 +1,161 @@
+<div>
+    <div id="filter_Y" style="border: 1px solid gray;width: 31%;;z-index: 0;padding-left: 50px;position: fixed;top:{{filter_height}}px">
+        <div ng-if="(type.key == 'brand') || (type.key == 'colour')|| (type.key == 'price') || (type.key == 'discount_percent') || (type.key == 'all_size') "
+             ng-repeat="type in filters">
+            <div ng-if="!(showing_more_filters && (search_display_name == type.display_name ))">
+                <h4 style="font-weight: 500;font-size: 15px"> {{type.display_name.toUpperCase()}}
+                    <span ng-click="filterExpand($index)" ng-if="filter_expand[$index]"
+                          style="cursor: pointer;float: right;padding-right:10px ">[-]</span>
+                    <span ng-click="filterExpand($index)" ng-if="!filter_expand[$index]"
+                          style="cursor: pointer;float: right;padding-right:10px ">[+]</span>
+                </h4>
+                <div ng-show="filter_expand[$index]" style="padding-left: 10px">
+                    <div class="filter_checkbox">
+                        <div ng-repeat="value in type.values.slice(0,6)" style="">
+                            <input id="{{value}}" ng-style="getMe(value,type.key) && {'border':'none'}" type="checkbox"
+                                   ng-checked="getMe(value,type.key)"
+                                   ng-click="includeFilter(value,type.key,3)"/>&nbsp;
+                            <label style="font-weight: 400; font-size: 13px; color: #707070;"
+                                   for="{{value}}">{{value}}</label>
+                        </div>
+                        <br>
+                        <span ng-show="(type.values.length - 6)"
+                              ng-click="popUpShowMore(type.values,type.key,type.display_name)"
+                              style="cursor: pointer;color: #0792be">{{type.values.length - 6}} MORE</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showing_more_filters" style="z-index: 2"
+                 ng-if="showing_more_filters && (search_display_name == type.display_name )">
+                <h4 id="show_more_head" style="font-weight: 500;">
+                    <span style="padding: 10px;">{{search_display_name.toUpperCase()}}</span>
+                    <span ng-click="closeSMF()"
+                          style="font-weight: bold;cursor: pointer;float: right;margin-right: 10px"> X </span>
+                    <input class="square_search_box" ng-change="updateFiltersLen(show_more_search)"
+                           ng-model="show_more_search"
+                           style="width: 200px;margin-left: 10px; display: inline; " type="text"
+                           class="form-control  ng-pristine ng-valid ng-empty ng-touched" placeholder="Search">
+                    <span> &nbsp;&nbsp;
+                        <span style="letter-spacing: 3px;"
+                              ng-repeat="alph in ['@','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']">
+                            <small class="filter_letter_parent" ng-click="gotoAnchor(alph)"
+                                   ng-if="filter_letters.indexOf(alph) != -1">
+                                <span ng-if="alph == '@' ">
+                                    <a class="hoverdiv" ng-mouseenter="showUnderline('at')" ng-mouseleave="removeUnderline('at')"
+                                       style="cursor: pointer; font-weight: 500; color: #343434;
+                                text-decoration: none;">{{alph | uppercase}}</a>
+                                </span>
+                                <span ng-if="alph != '@' ">
+                                    <a class="hoverdiv" ng-mouseenter="showUnderline(alph)" ng-mouseleave="removeUnderline(alph)"
+                                       style="cursor: pointer; font-weight: 500; color: #343434;
+                                text-decoration: none;">{{alph | uppercase}}</a>
+                                </span>
+                            </small>
+                            <small ng-if="filter_letters.indexOf(alph) == -1">
+                                <span class="not-active"
+                                      style="font-weight: 400; color: #9d9d9d;">{{alph | uppercase}}</span>
+                            </small>
+                        </span>
+                    </span>
+                </h4>
+
+                <div style="display: flex;overflow-x: scroll;padding: 20px;min-height: 400px">
+                    <div ng-style="(showing_more_filters) ? { 'columns': no_of_columns,'column-width':'180px','height':'350px'} :
+                    {'column-width':'auto', 'column-count':50,'height':'350px'}"
+                         style="column-width:auto; column-count:52; word-wrap:break-word;">
+                        <div class="filter_checkbox" id="checkbox_text" style="display: grid;word-wrap: break-word;"
+                             ng-repeat="x in chunk_filters | filter : show_more_search track by $index" >
+                            <input id="{{x}}" ng-style="getMe(x,chunk_type_name) && {'border':'none'}"
+                                   ng-checked="getMe(x,chunk_type_name)"
+                                   type="checkbox" ng-click="includeFilter(x,chunk_type_name,2)"
+                                   ng-if=" x.length != 1" style="margin-left:15px;"/>
+                            <label id="scrollTo_{{x}}" style="width:100%;font-weight: 400; font-size: 15px;
+                                   display: inline-flex; color: #434343; margin-left:-15px;" ng-if=" x.length == 1">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="scrollTo_at" ng-if="x == '@' " style="font-weight: 600; padding: 2px;">
+                                    {{x | uppercase}}
+                                </span>
+                                <span class="scrollTo_{{x}}" ng-if="x != '@' " style="font-weight: 600; padding: 2px;">
+                                    {{x | uppercase}}
+                                </span>
+                            </label>
+                            <label style="font-weight: 400; font-size: 13px;display: inline-flex; color: #707070;"
+                                   for="{{x}}" ng-if=" x.length != 1">{{x | uppercase}}</label>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+
+                <div class="show_more_footer">
+                    <button ng-click="clearAll(chunk_type_name)" class="btn btn-reset"
+                            style="background-color: #C3C3C3; border-radius: 0; padding: 10px 30px 10px 30px;">CLEAR ALL
+                    </button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button  ng-click="includeFilter('asd',chunk_type_name,1)" class="btn btn-primary" style="border-radius: 0; padding: 10px 40px 10px 40px; ">APPLY
+                    </button>
+                </div>
+            </div>
+            <hr ng-hide="($index == 4)" style=" margin-left: -50px;border-top: 1px solid lightgray;">
+        </div>
+    </div>
+</div>
+
+
+<div class="show_all_filters">
+    <div class="view_all_container">
+        <div class="view_all_sidebar">
+            <div class="benefit_type_heading">
+                <h4>
+                    BENEFITS BY
+                </h4>
+            </div>
+            <div class="benefit_type_container">
+                <div class="benefit_type" ng-class="{active_benefit_type : type === all_benefits_type[active_benefit_index]}"
+                     ng-click="set_active_benefit_index($index)" ng-repeat="type in all_benefits_type">
+                    <h5>{{type | removeunderscore}}</h5>
+                </div>
+            </div>
+        </div>
+
+        <div id="filter_values">
+            <div class="benefit_type_heading">
+                <h4>
+                    <span> {{all_benefits[active_benefit_index].benefits_type.toUpperCase() | removeunderscore}}</span>
+                    <span ng-click="close_add_more_benefits()"
+                          style="font-weight: bold; cursor: pointer; float: right;margin-right: 10px"><span class="glyphicon glyphicon-remove" ></span> </span>
+                </h4>
+                <div class="search_benefits_container">
+                    <input class="square_search_box" ng-change="updateFiltersLen(show_more_search)"
+                           ng-model="show_more_search"
+                           style="width: 100%;" type="text"
+                           class="form-control  ng-pristine ng-valid ng-empty ng-touched" placeholder="Search">
+                </div>
+            </div>
+            <div class="benefit_values_container">
+                <div ng-style="{'column-count': 2}" class="benefit_value_columns">
+                    <div ng-repeat="benefit in all_benefits[active_benefit_index].benefits | filter : show_more_search ">
+                        <input id="{{benefit.value}}" ng-checked="check_if_benefit_applied(benefit.value)" type="checkbox"
+                               ng-style="check_if_checkbox_checked(benefit.value) && {'border':'none'}"
+                               ng-click="update_applied_benefits(benefit,true)"  class="benefit_checkbox checkbox-inline"/>
+                        <label class="benefit_value" for="{{benefit.value}}">{{benefit.display_name}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row benefit_finish_container">
+                <div class="col-xs-4 col-md-3 pull-right">
+                    <button ng-click="apply_benefits()" class="btn btn-block btn-primary apply_btn">
+                        APPLY
+                    </button>
+                </div>
+                <div class="col-xs-4 col-md-3 pull-right">
+                    <button ng-click="clear_benefits_based_on_type(all_benefits[active_benefit_index].benefits)" class="btn btn-block btn-reset pull-right clear_all_btn">
+                        CLEAR ALL
+                    </button>
+                </div>
+                <div class="col-xs-1 col-md-1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -276,5 +276,10 @@
 		<priority>.5</priority>
 		<changefreq>weekly</changefreq>
 	</url>
+		<url>
+		<loc>https://www.selekt.in/sitemap/xml_file_55.xml</loc>
+		<priority>.5</priority>
+		<changefreq>weekly</changefreq>
+	</url>
 </urlset>
 	
