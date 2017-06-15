@@ -143,6 +143,34 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
     $scope.active_skintone = "";
     $scope.active_bc = [];
 
+    //This array contains the benefits which are to be added to $scope.applied_benefits when the apply button is clicked
+    $scope.benefits_to_be_pushed = [];
+    $scope.benefits_to_be_removed = [];
+
+    //Initialising the active tab in add more benefits modal box to first tab at start
+    $scope.active_benefit_index = 0;
+
+
+
+    $scope._show_more = 0;
+    $scope.show_more_less = "▼";
+
+    $scope.filter_expand = [1, 1, 1, 1, 1, 1, 0, 0, 0, 0];
+
+    $scope.showing_more_filters = 0;
+
+
+    $scope.show_all_filters = 0;
+    $scope.show_all_benefits = 0;
+    $scope.v = 0;
+    $scope.filter_values_len = 10;
+
+    $scope.hovering = false;
+    $scope.prev_hovering = false;
+
+
+    $scope.suggestion_timer = 0;
+    $scope.show_autocomplete_list = 0;
 
 
     $timeout(function () {
@@ -3487,6 +3515,112 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
             $scope.all_benefits = $localStorage.all_benefits ; 
             $scope.applied_benefits = $localStorage.applied_benefits ;
 
+
+
+            // new once added 16/06/17 
+
+
+            $rootScope.restorestate = $localStorage.restorestate;
+            $scope.device_id = $localStorage.device_id;
+            $scope.inspiration_tiles = $localStorage.inspiration_tiles;
+            $scope.multi_select = $localStorage.multi_select;
+            $scope.latestMesg = $localStorage.latestMesg;
+            $scope.headings = $localStorage.headings;
+            $scope.temp_headings = $localStorage.temp_headings;
+            $scope.first_time_heading = $localStorage.first_time_heading;
+            $scope.showtype = $localStorage.showtype;
+            $scope.inspiration_tiles = $localStorage.inspiration_tiles;
+            $scope.sentences = $localStorage.sentences;
+            $scope.tabular = $localStorage.tabular;
+            $scope.question = $localStorage.question;
+            $scope.popular_searches = $localStorage.popular_searches;
+            $scope.resultCame = $localStorage.resultCame;
+            $scope.inspirations_false = $localStorage.inspirations_false;
+            $scope.inspirations_true = $localStorage.inspirations_true;
+            $scope.brandLetter = $localStorage.brandLetter;
+            $scope.brand_values = $localStorage.brand_values;
+            $scope.shop_by_brands = $localStorage.shop_by_brands;
+            $scope.product_list_content_dir = $localStorage.product_list_content_dir;
+            $scope.inspirations_dir = $localStorage.inspirations_dir;
+            $scope.current_productline = $localStorage.current_productline;
+            $scope.productline_name = $localStorage.productline_name;
+            $scope.current_page = $localStorage.current_page;
+            $scope.textTag = $localStorage.textTag;
+            $scope.remining = $localStorage.remining;
+            $scope.show_loader = $localStorage.show_loader;
+            $scope.products_list = $localStorage.products_list;
+            $scope.ref = $localStorage.ref;
+            $scope.web_structure_level_1 = $localStorage.web_structure_level_1;
+            $scope.web_structure_list_level_1 = $localStorage.web_structure_list_level_1;
+            $scope.show_all_benefits = $localStorage.show_all_benefits;
+            $scope.benefits_to_be_pushed = $localStorage.benefits_to_be_pushed;
+            $scope.benefits_to_be_removed = $localStorage.benefits_to_be_removed;
+            $scope.brandLetter = $localStorage.brandLetter;
+            $scope.remining = $localStorage.remining;
+            $scope.show_autocomplete_list = $localStorage.show_autocomplete_list;
+            $scope.search = $localStorage.search;
+            $scope.active_bc = $localStorage.active_bc;
+            $scope.second_form_submitted = $localStorage.second_form_submitted;
+            $scope.callback_cache = $localStorage.callback_cache;
+            $scope.offcanvas_show_edit = $localStorage.offcanvas_show_edit;
+            $scope.offcanvas_show_profile = $localStorage.offcanvas_show_profile;
+            $scope.ua_form_submitted = $localStorage.ua_form_submitted;
+            $scope.ua_age = $localStorage.ua_age;
+            $scope.ua_height = $localStorage.ua_height;
+            $scope.ua_bodyshape = $localStorage.ua_bodyshape;
+            $scope.ua_skintone = $localStorage.ua_skintone;
+            $scope.active_age = $localStorage.active_age;
+            $scope.active_height = $localStorage.active_height;
+            $scope.active_bodyshape = $localStorage.active_bodyshape;
+            $scope.active_skintone = $localStorage.active_skintone;
+            $scope.show_overlay = $localStorage.show_overlay;
+            $scope.currentUser = $localStorage.currentUser;
+            $rootScope.query = $localStorage.query;
+            $scope.webpage_num = $localStorage.webpage_num;
+            $scope.results = $localStorage.results;
+            $scope.multiselect_keys = $localStorage.multiselect_keys;
+            $scope.multi_select_selected = $localStorage.multi_select_selected;
+            $scope._show_more = $localStorage._show_more;
+            $scope.show_more_less = $localStorage.show_more_less;
+            $rootScope.product_page = $localStorage.product_page;
+            $scope.show_all_filters = $localStorage.show_all_filters;
+            $scope.show_more_search = $localStorage.show_more_search;
+            $scope.filter_expand = $localStorage.filter_expand;
+            $scope.show_filter = $localStorage.show_filter;
+            $scope.show_more_popup = $localStorage.show_more_popup;
+            $scope.showing_more_filters = $localStorage.showing_more_filters;
+            $scope.show_more_search = $localStorage.show_more_search;
+            $scope.more_filters = $localStorage.more_filters;
+            $scope.filter_letters = $localStorage.filter_letters;
+            $scope.chunk_type_name = $localStorage.chunk_type_name;
+            $scope.search_display_name = $localStorage.search_display_name;
+            $scope.chunk_filters = $localStorage.chunk_filters;
+            $scope.showing_more_filters = $localStorage.showing_more_filters;
+            $scope.show_all_filters = $localStorage.show_all_filters;
+            $scope.show_all_benefits = $localStorage.show_all_benefits;
+            $scope.v = $localStorage.v;
+            $scope.filter_values_len = $localStorage.filter_values_len;
+            $scope.no_of_columns = $localStorage.no_of_columns;
+            $scope.user_selected_categories = $localStorage.user_selected_categories;
+            $scope.hovering = $localStorage.hovering;
+            $scope.prev_hovering = $localStorage.prev_hovering;
+            $scope.current_hover = $localStorage.current_hover;
+            $scope.suggestion_timer = $localStorage.suggestion_timer;
+            $scope.show_autocomplete_list = $localStorage.show_autocomplete_list;
+            $scope.chat_suggestions_options = $localStorage.chat_suggestions_options;
+            $scope.chat_suggestions_heading = $localStorage.chat_suggestions_heading;
+            $scope.chat_suggestions_understood = $localStorage.chat_suggestions_understood;
+
+
+            //  end new once  
+
+
+
+
+
+
+
+
             /* to scroll back to previous location , scroll values set in setProductPage function */
             console.log("localStorage",$localStorage);
             
@@ -4325,9 +4459,6 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
          }
          */
     });
-    //This array contains the benefits which are to be added to $scope.applied_benefits when the apply button is clicked
-    $scope.benefits_to_be_pushed = [];
-    $scope.benefits_to_be_removed = [];
 
     /*
      This function takes two arguments, benefit and flag and asks the back-end for
@@ -4429,8 +4560,7 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
         if (document.getElementById(id).checked) return true;
         return false;
     };
-    //Initialising the active tab in add more benefits modal box to first tab at start
-    $scope.active_benefit_index = 0;
+
 
     //This function takes the index of the clicked benefit tab from the front end and changes the active_benefit_index value so that tab changes
     $scope.set_active_benefit_index = function (index) {
@@ -5043,7 +5173,7 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
     $scope.hideWave = function () {
         // console.log("wave hided");
     };
-    $scope.show_loader =0;
+    $scope.show_loader =0; /*  dangling show loader */
     $scope.showMoreProducts = function () {
         $scope.showload = 0;
         $scope.show_loader =1;
@@ -5190,8 +5320,6 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
         }
     };
 
-    $scope._show_more = 0;
-    $scope.show_more_less = "▼";
     $scope.showMore = function () {
         if ($scope.show_more_less == '▼') {
             $scope.show_more_less = "▲";
@@ -5221,7 +5349,7 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
         //alert('setting product page'+$scope.productline_name);
 
         //$localStorage['search'] = $scope.productline_name ;
-        $localStorage['search'] = $rootScope.absUrls.split('/')[4] ;
+        
         console.log("LOLOLOLOLOLOLO ",$localStorage['search']);
         var data = '{"session_id" :"' + $scope.session_id + '","device_id"  :"' + $scope.device_id + '","user_name"  : "User ","type" : "message" ,"message" :"clear" }';
         $localStorage['chat_session_data'] = data ;    
@@ -5263,9 +5391,124 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
 
         //$localStorage.productline_name = $scope.productline_name ;
 
+        // new ones added 16/06/17
+
+        $localStorage.restorestate = $rootScope.restorestate;
+        $localStorage.device_id = $scope.device_id;
+        $localStorage.inspiration_tiles = $scope.inspiration_tiles;
+        $localStorage.multi_select = $scope.multi_select;
+        $localStorage.latestMesg = $scope.latestMesg;
+        $localStorage.headings = $scope.headings;
+        $localStorage.temp_headings = $scope.temp_headings;
+        $localStorage.first_time_heading = $scope.first_time_heading;
+        $localStorage.showtype = $scope.showtype;
+        $localStorage.inspiration_tiles = $scope.inspiration_tiles;
+        $localStorage.sentences = $scope.sentences;
+        $localStorage.tabular = $scope.tabular;
+        $localStorage.question = $scope.question;
+        $localStorage.popular_searches = $scope.popular_searches;
+        $localStorage.resultCame = $scope.resultCame;
+        $localStorage.inspirations_false = $scope.inspirations_false;
+        $localStorage.inspirations_true = $scope.inspirations_true;
+        $localStorage.brandLetter = $scope.brandLetter;
+        $localStorage.brand_values = $scope.brand_values;
+        $localStorage.shop_by_brands = $scope.shop_by_brands;
+        $localStorage.product_list_content_dir = $scope.product_list_content_dir;
+        $localStorage.inspirations_dir = $scope.inspirations_dir;
+        $localStorage.current_productline = $scope.current_productline;
+        $localStorage.productline_name = $scope.productline_name;
+        $localStorage.current_page = $scope.current_page;
+        $localStorage.textTag = $scope.textTag;
+        $localStorage.remining = $scope.remining;
+        $localStorage.show_loader = $scope.show_loader;
+        $localStorage.products_list = $scope.products_list;
+        $localStorage.ref = $scope.ref;
+        $localStorage.web_structure_level_1 = $scope.web_structure_level_1;
+        $localStorage.web_structure_list_level_1 = $scope.web_structure_list_level_1;
+        $localStorage.show_all_benefits = $scope.show_all_benefits;
+        $localStorage.benefits_to_be_pushed = $scope.benefits_to_be_pushed;
+        $localStorage.benefits_to_be_removed = $scope.benefits_to_be_removed;
+        $localStorage.brandLetter = $scope.brandLetter;
+        $localStorage.remining = $scope.remining;
+        $localStorage.show_autocomplete_list = $scope.show_autocomplete_list;
+        //$localStorage.search = $scope.search;
+        $localStorage.active_bc = $scope.active_bc;
+        $localStorage.second_form_submitted = $scope.second_form_submitted;
+        $localStorage.callback_cache = $scope.callback_cache;
+        $localStorage.offcanvas_show_edit = $scope.offcanvas_show_edit;
+        $localStorage.offcanvas_show_profile = $scope.offcanvas_show_profile;
+        $localStorage.ua_form_submitted = $scope.ua_form_submitted;
+        $localStorage.ua_age = $scope.ua_age;
+        $localStorage.ua_height = $scope.ua_height;
+        $localStorage.ua_bodyshape = $scope.ua_bodyshape;
+        $localStorage.ua_skintone = $scope.ua_skintone;
+        $localStorage.active_age = $scope.active_age;
+        $localStorage.active_height = $scope.active_height;
+        $localStorage.active_bodyshape = $scope.active_bodyshape;
+        $localStorage.active_skintone = $scope.active_skintone;
+        $localStorage.show_overlay = $scope.show_overlay;
+        $localStorage.currentUser = $scope.currentUser;
+        $localStorage.query = $rootScope.query;
+        $localStorage.webpage_num = $scope.webpage_num;
+        $localStorage.results = $scope.results;
+        $localStorage.multiselect_keys = $scope.multiselect_keys;
+        $localStorage.multi_select_selected = $scope.multi_select_selected;
+        $localStorage._show_more = $scope._show_more;
+        $localStorage.show_more_less = $scope.show_more_less;
+        $localStorage.product_page = $rootScope.product_page;
+        $localStorage.show_all_filters = $scope.show_all_filters;
+        $localStorage.show_more_search = $scope.show_more_search;
+        $localStorage.filter_expand = $scope.filter_expand;
+        $localStorage.show_filter = $scope.show_filter;
+        $localStorage.show_more_popup = $scope.show_more_popup;
+        $localStorage.showing_more_filters = $scope.showing_more_filters;
+        $localStorage.show_more_search = $scope.show_more_search;
+        $localStorage.more_filters = $scope.more_filters;
+        $localStorage.filter_letters = $scope.filter_letters;
+        $localStorage.chunk_type_name = $scope.chunk_type_name;
+        $localStorage.search_display_name = $scope.search_display_name;
+        $localStorage.chunk_filters = $scope.chunk_filters;
+        $localStorage.showing_more_filters = $scope.showing_more_filters;
+        $localStorage.show_all_filters = $scope.show_all_filters;
+        $localStorage.show_all_benefits = $scope.show_all_benefits;
+        $localStorage.v = $scope.v;
+        $localStorage.filter_values_len = $scope.filter_values_len;
+        $localStorage.no_of_columns = $scope.no_of_columns;
+        $localStorage.user_selected_categories = $scope.user_selected_categories;
+        $localStorage.hovering = $scope.hovering;
+        $localStorage.prev_hovering = $scope.prev_hovering;
+        $localStorage.current_hover = $scope.current_hover;
+        $localStorage.suggestion_timer = $scope.suggestion_timer;
+        $localStorage.show_autocomplete_list = $scope.show_autocomplete_list;
+        $localStorage.chat_suggestions_options = $scope.chat_suggestions_options;
+        $localStorage.chat_suggestions_heading = $scope.chat_suggestions_heading;
+        $localStorage.chat_suggestions_understood = $scope.chat_suggestions_understood;
+
+        // end new once 
+
+        $localStorage.users = $scope.users;
+        $localStorage.session_id = $scope.session_id;
+        $localStorage.applied_benefits = $scope.applied_benefits ;
+        $localStorage.all_benefits = $scope.all_benefits ;
+        $localStorage.all_benefits_type = $scope.all_benefits_type;
+
+        $localStorage.temp_list = $scope.temp_list  ;
+        $localStorage.showload = $scope.showload  ;
+
+        $localStorage.products_list =$scope.products_list ;           
+        $localStorage.temp_list = $scope.temp_list ;
+        $localStorage.textTag  = $scope.textTag;
+
+        $localStorage.total_items = $scope.total_items  ;
+
+        $localStorage.remining = $scope.remining ;   
+
+        // this takes care of womens page also 
+        $localStorage['search'] = $rootScope.absUrls.split('/')[4] ;
+
         timer = $timeout(function () {
             $window.location.href = $rootScope.website + '/product/'+$scope.productline_name+'/'+x._id;
-        }, 2000);
+        }, 3000);
         
     };
 
@@ -5362,7 +5605,8 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
             $scope.showload = 1;
         }
     };
-    $scope.filter_expand = [1, 1, 1, 1, 1, 1, 0, 0, 0, 0];
+    
+    
     $scope.filterExpand = function (index) {
         $scope.filter_expand[index] = !$scope.filter_expand[index];
     };
@@ -5370,7 +5614,9 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
         $scope.show_filter = !$scope.show_filter;
         $scope.show_more_popup = $scope.filters[0];
     };
-    $scope.showing_more_filters = 0;
+    
+
+    
     $scope.popUpShowMore = function (more_filters, type, display_name) {
         $scope.show_more_search = '';
         $scope.more_filters = more_filters;
@@ -5443,9 +5689,6 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
         
         };
 
-    $scope.show_all_filters = 0;
-    $scope.show_all_benefits = 0;
-    $scope.v = 0;
     $scope.setV = function (index) {
         $scope.v = index;
     };
@@ -5454,7 +5697,7 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
         $scope.show_more_search = '';
         // console.log('pop up closed>', $scope.showing_more_filters);
     };
-    $scope.filter_values_len = 10;
+    
     $scope.clearAll = function (type) {
         var name = '$scope.' + type + 'Includes = []';
         eval(name);
@@ -5530,8 +5773,6 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
         $location.path('/find/' + total_link);
     };
 
-    $scope.hovering = false;
-    $scope.prev_hovering = false;
 
     // create the timer variable
     var timer;
@@ -5639,9 +5880,6 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
         
         $scope.UndoTag();
     };
-
-    $scope.suggestion_timer = 0;
-    $scope.show_autocomplete_list = 0;
 
     $scope.hide_autocomplete_list = function () {
         $timeout(function () {
