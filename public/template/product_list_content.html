@@ -117,7 +117,7 @@
                     <div  ng-click="!add_link"
                      style="cursor: pointer;display: inline-flex;border:none;">
                         <div ng-click="Event('product page')" style="background: url('static/pics/image-loader.gif');background-repeat: no-repeat;margin:0px;padding:0px;background-position: center;">
-                            <a ng target="_self" ng-click="setProductPage(x,$event)"    
+                            <a ng-href="{{ website + '/product/' + productline_name + '/' + x._id }}"  ng target="_self" ng-click="setProductPage(x,$event)"    
                                 ><!--ng-click="loadProductPage(productline_name,x._id)"-->
                                 <img src="{{x.style_image.search.imageURL1}}" height="310px" width="220px">
                             </a>

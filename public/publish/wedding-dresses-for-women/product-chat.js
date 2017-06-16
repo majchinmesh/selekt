@@ -171,7 +171,7 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
 
     $scope.suggestion_timer = 0;
     $scope.show_autocomplete_list = 0;
-
+    $scope.undo_tag = 0;
 
     $timeout(function () {
         $scope.show_page = 1;
@@ -3409,7 +3409,7 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
 
     // march 7
 
-    $scope.undo_tag = 0;
+    
     var title = {};
     title["title"] = $routeParams.search;
     $scope.load = function () {
@@ -3610,7 +3610,7 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
             $scope.chat_suggestions_options = $localStorage.chat_suggestions_options;
             $scope.chat_suggestions_heading = $localStorage.chat_suggestions_heading;
             $scope.chat_suggestions_understood = $localStorage.chat_suggestions_understood;
-
+            $scope.undo_tag = $localStorage.undo_tag ;
 
             //  end new once  
 
@@ -5483,7 +5483,7 @@ app.controller("WeddingDressesForWomen", ["$http", "$rootScope", '$scope', '$win
         $localStorage.chat_suggestions_options = $scope.chat_suggestions_options;
         $localStorage.chat_suggestions_heading = $scope.chat_suggestions_heading;
         $localStorage.chat_suggestions_understood = $scope.chat_suggestions_understood;
-
+        $localStorage.undo_tag = $scope.undo_tag ;
         // end new once 
 
         $localStorage.users = $scope.users;
